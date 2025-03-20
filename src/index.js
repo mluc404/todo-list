@@ -3,13 +3,24 @@ import "./sidebar.css";
 import "./form.css";
 import "./taskDisplay.css";
 import { createTask, displayTask, removeTask } from "./createTask.js";
+import { format } from "date-fns";
+
+console.log(new Date());
 
 // Create and Display task upon form submission
 let form = document.querySelector("form");
+let todayDate = format(new Date(), "yyyy-MM-dd");
+// let todayDate = new Date();
+window.onload = (() => {
+  document.querySelector("#dueDate").setAttribute("value", todayDate);
+})();
+
 let formSubmitButton = document.querySelector("#formSubmitButton");
 formSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
   let task = createTask();
+  console.log(task);
+
   displayTask(task);
   form.reset();
 });

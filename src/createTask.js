@@ -1,18 +1,21 @@
-import { format } from "date-fns";
+import { format, isToday, isTomorrow, isYesterday } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 // Function to get form inputs to create a task object
 let createTask = function () {
   let taskName = document.querySelector("#taskName").value.trim();
   let taskDescription = document.querySelector("#taskDescription").value.trim();
 
-  let todayDate = new Date();
-  console.log(todayDate);
-
-  let dueDate = document.querySelector("#dueDate");
-  dueDate.setAttribute("value", todayDate);
+  let dueDate = document.querySelector("#dueDate").value;
+  console.log(dueDate);
+  // let dueDate = null;
+  // calendar.addEventListener("change", (e) => {
+  //   console.log(e);
+  //   dueDate = e.target.value;
+  // });
 
   // will add due date, priority in task obj later
-  return { taskName, taskDescription };
+  return { taskName, taskDescription, dueDate };
 };
 
 // Function to display each task
@@ -41,13 +44,33 @@ let displayTask = function (task) {
 
   listTopRow.append(checkbox, taskName, taskRemoveButton);
 
-  // Bottom row of task item
+  // Second row of task item
   let taskDescription = document.createElement("p");
   taskDescription.className = "taskDescription";
   taskDescription.textContent = task.taskDescription;
 
-  // Append top row and task description into list item
-  listItem.append(listTopRow, taskDescription);
+  // Third row of task item
+  let dueDateDisplay = document.createElement("p");
+  dueDateDisplay.className = "dueDateDisplay";
+
+  // Get the user's local time zone
+  let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log("my zone: ", timeZone);
+  // Convert the date into user time zone
+  let zonedDate = toZonedTime(task.dueDate, timeZone);
+  // Format the date for display
+  let formattedDate = format(zonedDate, "EEEE, MMM dd");
+  // let formattedDate = format(zonedDate, "eeee - MMM dd, yyyy"); // is year necessary?
+
+  if (isToday(zonedDate)) dueDateDisplay.textContent = "Today";
+  else if (isTomorrow(zonedDate)) dueDateDisplay.textContent = "Tomorrow";
+  else if (isYesterday(zonedDate)) dueDateDisplay.textContent = "Yesterday";
+  else {
+    dueDateDisplay.textContent = `${formattedDate}`;
+  }
+
+  // Append top row, second and third rows into list item
+  listItem.append(listTopRow, taskDescription, dueDateDisplay);
 
   // Create a divider line to separate next task
   let divider = document.createElement("div");

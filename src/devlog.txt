@@ -1,3 +1,5 @@
+Thur 03/20: moved log to Notion for better management
+-----
 Wed 03/19
 
 feat: minimum functionality
