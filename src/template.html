@@ -6,15 +6,67 @@
     <title>Todo List</title>
   </head>
   <body>
-    <h1>Todo List</h1>
-    <form action="">
-      <input type="text" id="taskName" />
-      <input type="text" id="taskDescription" />
-      <button id="formSubmitButton">Submit</button>
-    </form>
+    <div class="todo-app">
+      <div class="sidebar">
+        <nav>
+          <div class="userInfo">UserName</div>
 
-    <div class="taskContainer">
-      <ul class="taskList"></ul>
+          <div
+            aria-label="Main Navigation: contains Today Task List, Projects, Labels, and Filters"
+            class="mainNav"
+          >
+            <div class="todayTab">
+              <button class="todayTabButton">Today</button>
+            </div>
+
+            <div class="projectsTab">
+              <button class="projectTabButton">Projects</button>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="mainSection">
+        <div class="todayPage">
+          <h1>Todo List</h1>
+          <div class="taskContainer">
+            <ul class="taskList"></ul>
+          </div>
+          <button class="addTaskButton">+ Add Task</button>
+          <dialog>
+            <form action="">
+              <input type="text" id="taskName" placeholder="Task name" />
+              <input
+                type="text"
+                id="taskDescription"
+                placeholder="Description"
+              />
+              <div class="spacer"></div>
+              <div class="taskUtils">
+                <button class="dueDate">Due date</button>
+                <button class="priorityButton">
+                  Priority
+                  <select name="priority" id="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                </button>
+                <button class="addToProject">More Action</button>
+              </div>
+              <div class="spacer"></div>
+              <div class="divider"></div>
+              <div class="spacer"></div>
+              <div class="addOrCancel">
+                <button class="closeFormButton">Cancel</button>
+                <button id="formSubmitButton">Add task</button>
+              </div>
+            </form>
+          </dialog>
+        </div>
+
+        <div class="projectPage"><h1>Projects Page</h1></div>
+      </div>
     </div>
   </body>
 </html>

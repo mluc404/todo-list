@@ -1,0 +1,25 @@
+Wed 03/19
+
+feat: minimum functionality
+
+    Created barebone features:
+    - Take input task details via a form
+    - Generate a task object upon form submission
+    - Display the task immediately in DOM
+
+TODO: 
+    - For main section:
+        - Add more features inside the form: dueDate, priority 
+        - Diplay those additional features
+        - Make form into a dialog
+        - Create a button to open that form
+    
+    - Add a side bar:
+        - A nav bar with 2 tabs: Today, Projects
+        - Fix nav bar bg height not 100% when dialog extends body height
+------
+
+feat: separate 2 main pages: Today and Projects
+
+    - Created sidebar with navigation 
+    - Put task creation form inside a dialog

@@ -1,4 +1,6 @@
 import "./styles.css";
+import "./sidebar.css";
+import "./mainSection.css";
 import createTask from "./createTask.js";
 
 let formSubmitButton = document.querySelector("#formSubmitButton");
@@ -23,3 +25,31 @@ let handleDOM = function (task) {
   </li>
   <div class='divider'></div>`;
 };
+
+let addTaskButton = document.querySelector(".addTaskButton");
+let closeFormButton = document.querySelector(".closeFormButton");
+let dialog = document.querySelector("dialog");
+addTaskButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeFormButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  dialog.close();
+});
+
+// show pages on off
+let todayPage = document.querySelector(".todayPage");
+let projectPage = document.querySelector(".projectPage");
+let todayTabButton = document.querySelector(".todayTabButton");
+let projectTabButton = document.querySelector(".projectTabButton");
+
+projectTabButton.addEventListener("click", () => {
+  todayPage.style.display = "none";
+  projectPage.style.display = "block";
+});
+
+todayTabButton.addEventListener("click", () => {
+  todayPage.style.display = "block";
+  projectPage.style.display = "none";
+});

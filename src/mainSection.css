@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+}
+
+form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border: rgb(191, 191, 191) solid 1px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input[type="text"] {
+  border: none;
+  background-color: transparent;
+  /* border-bottom: rgb(184, 184, 184) solid 1px; */
+
+  height: 20px;
+}
+
+#taskName {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+#taskDescription {
+  font-size: 1.1rem;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+/* /////////////////////// */
+/* Prevent defaut auto fill white background */
+input:-webkit-autofill {
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0px 1000px #fffbe8 inset !important;
+  color: inherit !important;
+}
+
+input:-webkit-autofill:focus {
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0px 1000px #fffbe8 inset !important;
+  color: inherit !important;
+}
+
+#taskName::placeholder {
+  font-weight: 600;
+}
+
+.taskUtils {
+  display: flex;
+  justify-content: start;
+  gap: 15px;
+}
+
+.priorityButton {
+  /* border: none; */
+}
+
+select {
+  font-size: 1rem;
+  border: none;
+  background-color: rgb(253, 192, 81);
+}
+
+.addOrCancel {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+
+/* //////////////////////////////// */
+/* Task Display */
+.taskContainer {
+  width: 70%;
+  min-height: 100px;
+  background-color: #d4d2ce;
+  margin-top: 20px;
+  padding: 10px 0;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.taskList {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+}
+
+.aTask {
+  /* outline: blue solid 2px; */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  gap: 5px;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+li p {
+  margin: 0 0 0 25px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(139, 139, 139, 0.5);
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 1rem;
+}
