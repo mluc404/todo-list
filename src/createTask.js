@@ -1,7 +1,15 @@
+import { format } from "date-fns";
+
 // Function to get form inputs to create a task object
 let createTask = function () {
   let taskName = document.querySelector("#taskName").value.trim();
   let taskDescription = document.querySelector("#taskDescription").value.trim();
+
+  let todayDate = new Date();
+  console.log(todayDate);
+
+  let dueDate = document.querySelector("#dueDate");
+  dueDate.setAttribute("value", todayDate);
 
   // will add due date, priority in task obj later
   return { taskName, taskDescription };
@@ -18,19 +26,20 @@ let displayTask = function (task) {
   listTopRow.className = "listTopRow";
 
   // 3 elements to add into list top row
-  let checkBox = document.createElement("input");
-  checkBox.setAttribute("type", "checkbox");
-  checkBox.className = "checkbox";
+  let checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.className = "checkbox";
 
   let taskName = document.createElement("span");
   taskName.className = "taskName";
   taskName.textContent = task.taskName;
 
   let taskRemoveButton = document.createElement("button");
+  taskRemoveButton.setAttribute("aria-label", "Remove task");
   taskRemoveButton.className = "taskRemoveButton";
   taskRemoveButton.innerHTML = `&#x1F5D1;`;
 
-  listTopRow.append(checkBox, taskName, taskRemoveButton);
+  listTopRow.append(checkbox, taskName, taskRemoveButton);
 
   // Bottom row of task item
   let taskDescription = document.createElement("p");
@@ -48,16 +57,30 @@ let displayTask = function (task) {
   taskList.append(listItem, divider);
 
   // Activate Remove Task button functionality
-  removeTask(taskRemoveButton, taskList);
+  removeTask(taskRemoveButton);
+
+  // Add checkbox functionality
+  checkbox.addEventListener("change", (e) => {
+    if (e.target.checked) {
+      listItem.className = "completed";
+    } else {
+      listItem.className = "";
+    }
+  });
 };
 
 // Function to remove task
-let removeTask = function (removeButton, taskList) {
+let removeTask = function (removeButton) {
   let taskToRemove = removeButton.parentElement.parentElement;
+  let parentNode = taskToRemove.parentElement;
   let dividerToRemove = taskToRemove.nextElementSibling;
+
   removeButton.addEventListener("click", () => {
-    taskList.removeChild(taskToRemove);
-    taskList.removeChild(dividerToRemove);
+    parentNode.removeChild(taskToRemove);
+    if (dividerToRemove) {
+      // make sure only remove if it exist
+      parentNode.removeChild(dividerToRemove);
+    }
   });
 };
 

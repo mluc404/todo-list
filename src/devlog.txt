@@ -32,6 +32,11 @@ TODO:
 
 refactor(task-display): use DOM methods for task display and removal
 
-- Replaced innerHTML with createElement/append for task display
-- Separated removeTask into its own function
-- Improved performance and modularity
+    - Replaced innerHTML with createElement/append for task display
+    - Separated removeTask into its own function
+    - Improved performance and modularity
+
+=====================================================================
+
+Thursday, 3/20
+
