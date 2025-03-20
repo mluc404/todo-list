@@ -21,5 +21,17 @@ TODO:
 
 feat: separate 2 main pages: Today and Projects
 
-    - Created sidebar with navigation 
-    - Put task creation form inside a dialog
+    - Created sidebar with nav buttons
+    - Put task creating form inside a dialog
+    - Toggle Today page and Project page visibility
+TODO:
+    - Seperate functionalities into modules
+    - Continue working on features inside the dialog form
+
+------
+
+refactor(task-display): use DOM methods for task display and removal
+
+- Replaced innerHTML with createElement/append for task display
+- Separated removeTask into its own function
+- Improved performance and modularity

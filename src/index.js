@@ -1,34 +1,33 @@
 import "./styles.css";
 import "./sidebar.css";
 import "./mainSection.css";
-import createTask from "./createTask.js";
+import { createTask, displayTask } from "./createTask.js";
 
+// Create and Display task upon form submission
 let formSubmitButton = document.querySelector("#formSubmitButton");
 formSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
-
   let task = createTask();
-  console.log(task);
-
-  handleDOM(task);
+  displayTask(task);
 });
 
-let handleDOM = function (task) {
-  let taskContainer = document.querySelector(".classContainer");
+// Function to remove the default task "Go get egss"
+let removeTaskPlaceHolder = (function () {
   let taskList = document.querySelector(".taskList");
+  let removeButton = document.querySelector(".taskRemoveButton");
+  let taskToRemove = removeButton.parentElement.parentElement;
+  let dividerToRemove = taskToRemove.nextElementSibling;
+  removeButton.addEventListener("click", () => {
+    taskList.removeChild(taskToRemove);
+    taskList.removeChild(dividerToRemove);
+  });
+})();
 
-  taskList.innerHTML += `<li>
-  <span class='aTask'>
-  <input type='checkbox' class='checkbox'><span>${task.taskName}</span>
-  </span>
-  <p>${task.taskDescription}</p>
-  </li>
-  <div class='divider'></div>`;
-};
-
+// Open-Close Dialog
 let addTaskButton = document.querySelector(".addTaskButton");
 let closeFormButton = document.querySelector(".closeFormButton");
 let dialog = document.querySelector("dialog");
+
 addTaskButton.addEventListener("click", () => {
   dialog.showModal();
 });

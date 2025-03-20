@@ -58,10 +58,6 @@ input:-webkit-autofill:focus {
   gap: 15px;
 }
 
-.priorityButton {
-  /* border: none; */
-}
-
 select {
   font-size: 1rem;
   border: none;
@@ -96,16 +92,24 @@ select {
   padding: 0;
 }
 
-.aTask {
-  /* outline: blue solid 2px; */
-  display: flex;
+.listTopRow {
+  display: grid;
+  grid-template-columns: 20px 1fr 50px;
   align-items: center;
-  justify-content: start;
 
-  gap: 5px;
+  gap: 15px;
 
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+.taskRemoveButton {
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 30px;
+  height: 30px;
 }
 
 .checkbox {
@@ -120,8 +124,8 @@ li {
   gap: 5px;
 }
 
-li p {
-  margin: 0 0 0 25px;
+.taskDescription {
+  margin: 0 0 0 35px;
 }
 
 .divider {
@@ -130,7 +134,16 @@ li p {
   background-color: rgba(139, 139, 139, 0.5);
 }
 
-button {
+/* Hide the last divider */
+.divider:last-child {
+  display: none;
+}
+
+.sidebar button {
   padding: 5px 10px;
   font-size: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
 }
