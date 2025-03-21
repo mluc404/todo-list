@@ -1,3 +1,5 @@
+// This module handles task creation, display, and removal
+
 import { format, isToday, isTomorrow, isYesterday } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 
@@ -9,7 +11,6 @@ let createTask = function () {
   let dueDate = document.querySelector("#dueDate").value;
   let priority = document.querySelector("#priorityChoice").value;
 
-  // will add due date, priority in task obj later
   return { taskName, taskDescription, dueDate, priority };
 };
 
