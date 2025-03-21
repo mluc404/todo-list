@@ -96,25 +96,54 @@ let displayTask = function (task) {
   taskDescription.className = "taskDescription";
   taskDescription.textContent = task.taskDescription;
 
-  // Third row of task item: due date
+  // Third row of task item: due date and date picker button
+
+  let listThirdRow = document.createElement("div");
+  listThirdRow.className = "listThirdRow";
+
   let dueDateDisplay = document.createElement("p");
   dueDateDisplay.className = "dueDateDisplay";
 
-  let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get the user's local time zone
-  // console.log("my zone: ", timeZone);
-  let zonedDate = toZonedTime(task.dueDate, timeZone); // Convert the date into user time zone
-  let formattedDate = format(zonedDate, "EEEE, MMM dd");
-  // let formattedDate = format(zonedDate, "eeee - MMM dd, yyyy"); // is year necessary?
+  // Function to format task.dueDate to display
+  let setDueDate = () => {
+    let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get the user's local time zone
+    let zonedDate = toZonedTime(task.dueDate, timeZone); // Convert the date into user time zone
+    let formattedDate = format(zonedDate, "EEEE, MMM dd");
+    // let formattedDate = format(zonedDate, "eeee - MMM dd, yyyy"); // is year necessary?
 
-  if (isToday(zonedDate)) dueDateDisplay.textContent = "Today";
-  else if (isTomorrow(zonedDate)) dueDateDisplay.textContent = "Tomorrow";
-  else if (isYesterday(zonedDate)) dueDateDisplay.textContent = "Yesterday";
-  else {
-    dueDateDisplay.textContent = `${formattedDate}`;
-  }
+    if (isToday(zonedDate)) dueDateDisplay.textContent = "Today";
+    else if (isTomorrow(zonedDate)) dueDateDisplay.textContent = "Tomorrow";
+    else if (isYesterday(zonedDate)) dueDateDisplay.textContent = "Yesterday";
+    else {
+      dueDateDisplay.textContent = `${formattedDate}`;
+    }
+  };
+
+  setDueDate();
+
+  // Calendar button
+  let calendarButtonDiv = document.createElement("div");
+  calendarButtonDiv.className = "calendarButtonDiv";
+  let calendarButton = document.createElement("input");
+  calendarButton.setAttribute("type", "date");
+  calendarButton.className = "calendarButton";
+
+  calendarButton.setAttribute("value", task.dueDate);
+  console.log("Calendar Button: ", calendarButton);
+
+  calendarButtonDiv.appendChild(calendarButton);
+
+  calendarButton.addEventListener("change", (e) => {
+    // select new due date and update the display
+    console.log(calendarButton.value);
+    task.dueDate = calendarButton.value;
+    setDueDate();
+  });
+
+  listThirdRow.append(calendarButtonDiv, dueDateDisplay);
 
   // Append top row, second and third rows into list item
-  listItem.append(listTopRow, taskDescription, dueDateDisplay);
+  listItem.append(listTopRow, taskDescription, listThirdRow);
 
   // Create a divider line to separate next task
   let divider = document.createElement("div");

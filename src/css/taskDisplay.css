@@ -94,12 +94,44 @@ li {
   margin: 0 0 0 35px;
 }
 
+/* ////////////////////////////////////////// */
+/* List Third Row */
+.listThirdRow {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+
+  margin: 0 0 0 35px;
+}
+
 /* due date */
 .dueDateDisplay {
   /* color: rgb(36, 109, 255); */
   margin: 0;
-  padding: 0 0 0 35px;
+  padding: 0;
 }
+
+/* Calendar Button */
+.calendarButton {
+  height: 25px;
+  font-size: 1rem;
+  width: 25px;
+  color: skyblue; /* set text color same with bg */
+  cursor: pointer; /* need a work around later to make this work*/
+
+  padding-right: 1px; /* manually center the icon */
+
+  background-color: skyblue;
+  border: grey solid 1px;
+  border-radius: 2px;
+}
+
+.calendarButton::-webkit-calendar-picker-indicator {
+  background-color: skyblue; /* set icon color */
+}
+
+/* //////////////////////////////////////////// */
 
 .divider {
   width: 100%;
