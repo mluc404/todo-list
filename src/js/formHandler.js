@@ -13,6 +13,7 @@ const initForm = () => {
   // Handle task priority selection
   let priorityChoice = document.querySelector("#priorityChoice");
   priorityChoice.addEventListener("change", (e) => {
+    console.log("<select> obj", e.target.selectedOptions);
     console.log(e.target.value);
     let choice = e.target.value;
     if (choice === "high") priorityChoice.style.backgroundColor = "#e77b50";

@@ -93,18 +93,19 @@ input:-webkit-autofill:focus {
 
 #priorityChoice {
   background-color: #e77b50;
+  /* background-color: #f18b63; */
   outline: none;
 }
 
-#highPriority {
+.highPriority {
   background-color: #e77b50;
 }
 
-#medPriority {
+.medPriority {
   background: #fdc04e;
 }
 
-#lowPriority {
+.lowPriority {
   background-color: #6dbbda;
 }
 

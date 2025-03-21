@@ -2,10 +2,12 @@
 .taskContainer {
   width: 70%;
   min-height: 100px;
-  background-color: #d4d2ce;
+  /* background-color: #d4d2ce; */
+  /* background-color: #e7e5e2; */
+  border: rgba(139, 139, 139, 0.5) solid 1px;
   margin-top: 20px;
   padding: 10px 0;
-  border-radius: 10px;
+  border-radius: 8px;
 
   display: flex;
   justify-content: center;
@@ -21,14 +23,51 @@
 
 .listTopRow {
   display: grid;
-  grid-template-columns: 20px 1fr 50px;
+  grid-template-columns: 20px 1fr 30px 30px;
   align-items: center;
+  /* justify-items: center; */
 
   gap: 15px;
 
   font-size: 1.1rem;
   font-weight: 600;
+
+  position: relative;
 }
+/* .selectionDialog {
+  position: absolute;
+  translate: 100px 50px;
+  background-color: rgba(0, 0, 255, 0);
+  margin-right: 50px;
+  transform: translateY(30px);
+} */
+
+.flagSelection {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  /* border: grey solid 1px; */
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 1.1rem;
+
+  text-align: center;
+  outline: none;
+
+  /* background: lime !important; */
+}
+.flagSelection .medPriority {
+  /* background: lime; */
+}
+
+/* .priorityDisplay {
+  border: red solid 1px;
+  width: fit-content;
+  padding: 0 5px;
+  font-weight: 500;
+
+  border-radius: 3px;
+} */
 
 .taskRemoveButton {
   font-size: 1.2rem;
