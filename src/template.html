@@ -53,22 +53,22 @@
               />
               <div class="spacer"></div>
               <div class="taskUtils">
-                <!-- <button class="dueDate">Due date</button> -->
-                <!-- <label for="dueDate" class="dueDateLabel">Due date: </label> -->
                 <input
                   type="date"
                   id="dueDate"
                   name="dueDate"
                   value="2222-02-22"
                 />
-                <button class="priorityButton">
-                  Priority
-                  <select name="priority" id="priority">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                <div class="priorityDiv">
+                  <label for="priorityChoice" id="priorityFlag"
+                    >&#x1F3F3;</label
+                  >
+                  <select name="priorityChoice" id="priorityChoice">
+                    <option value="high" id="highPriority">High</option>
+                    <option value="medium" id="medPriority">Medium</option>
+                    <option value="low" id="lowPriority">Low</option>
                   </select>
-                </button>
+                </div>
                 <button class="addToProject">More Action</button>
               </div>
               <div class="spacer"></div>

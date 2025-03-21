@@ -5,23 +5,34 @@ import "./taskDisplay.css";
 import { createTask, displayTask, removeTask } from "./createTask.js";
 import { format } from "date-fns";
 
-console.log(new Date());
-
-// Create and Display task upon form submission
+// Form handling
 let form = document.querySelector("form");
 let todayDate = format(new Date(), "yyyy-MM-dd");
-// let todayDate = new Date();
 window.onload = (() => {
   document.querySelector("#dueDate").setAttribute("value", todayDate);
 })();
 
+// Handle Priority select
+let priorityChoice = document.querySelector("#priorityChoice");
+priorityChoice.addEventListener("change", (e) => {
+  console.log(e.target.value);
+  let choice = e.target.value;
+
+  if (choice === "high") priorityChoice.style.backgroundColor = "#e77b50";
+  else if (choice === "medium")
+    priorityChoice.style.backgroundColor = "#fdc04e";
+  else priorityChoice.style.backgroundColor = "#6dbbda";
+});
+
+// Create and display tasks upon hitting form submission button
 let formSubmitButton = document.querySelector("#formSubmitButton");
+let selectPriority = form.querySelector("select");
 formSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
   let task = createTask();
   console.log(task);
-
   displayTask(task);
+  selectPriority.style.backgroundColor = "#e77b50";
   form.reset();
 });
 

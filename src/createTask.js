@@ -7,15 +7,10 @@ let createTask = function () {
   let taskDescription = document.querySelector("#taskDescription").value.trim();
 
   let dueDate = document.querySelector("#dueDate").value;
-  console.log(dueDate);
-  // let dueDate = null;
-  // calendar.addEventListener("change", (e) => {
-  //   console.log(e);
-  //   dueDate = e.target.value;
-  // });
+  let priority = document.querySelector("#priorityChoice").value;
 
   // will add due date, priority in task obj later
-  return { taskName, taskDescription, dueDate };
+  return { taskName, taskDescription, dueDate, priority };
 };
 
 // Function to display each task

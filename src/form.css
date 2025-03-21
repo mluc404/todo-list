@@ -72,10 +72,46 @@ input:-webkit-autofill:focus {
   font-size: 1rem;
 }
 
+/* Priority Style */
+.priorityDiv {
+  border: grey solid 1px;
+  border-radius: 2px;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 4px 5px;
+}
+
+#priorityFlag {
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+#priorityChoice {
+  background-color: #e77b50;
+  outline: none;
+}
+
+#highPriority {
+  background-color: #e77b50;
+}
+
+#medPriority {
+  background: #fdc04e;
+}
+
+#lowPriority {
+  background-color: #6dbbda;
+}
+
 select {
   font-size: 1rem;
   border: none;
-  background-color: rgb(253, 192, 81);
+  /* background-color: rgb(253, 192, 81); */
 }
 
 /* Bottom 2 buttons */
