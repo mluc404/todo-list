@@ -34,6 +34,7 @@ const createDatePicker = (task) => {
   calendarButton.setAttribute("type", "date");
   calendarButton.className = "calendarButton";
   calendarButton.setAttribute("value", task.dueDate);
+  calendarButton.setAttribute("aria-label", "Change due date");
 
   calendarButton.addEventListener("change", (e) => {
     task.dueDate = e.target.value;
@@ -62,6 +63,7 @@ const createFlag = (task) => {
 
   let flagSelection = document.createElement("select");
   flagSelection.className = "flagSelection";
+  flagSelection.setAttribute("aria-label", "Change task priority");
 
   flagSelection.append(option0, option1, option2, option3);
 

@@ -3,6 +3,8 @@
 import { createTask, displayTask, removeTask } from "./taskHandler.js";
 import { format } from "date-fns";
 
+import { addTask, getAllTasks } from "./taskManager.js";
+
 // Initialize form
 const initForm = () => {
   let form = document.querySelector("form");
@@ -31,6 +33,11 @@ const initForm = () => {
     let task = createTask();
     displayTask(task);
     console.log(`task initial priority: ${task.priority}`);
+    // Testing add task to storage
+    addTask(task);
+    let allTasks = getAllTasks();
+    console.log(allTasks[0]);
+    console.table(allTasks[0]);
     selectPriority.style.backgroundColor = "var(--dialog-bg-color, white)"; // reset to default None
     form.reset();
   });
