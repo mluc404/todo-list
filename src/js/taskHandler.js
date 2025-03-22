@@ -14,32 +14,38 @@ let createTask = function () {
   return { taskName, taskDescription, dueDate, priority };
 };
 
-// Function to display each task
-let displayTask = function (task) {
-  let taskContainer = document.querySelector(".classContainer");
-  let taskList = document.querySelector(".taskList");
-  let listItem = document.createElement("li");
+// Utility function to format and set the due date display
+let setDueDate = (task, dueDateDisplay) => {
+  let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get the user's local time zone
+  let zonedDate = toZonedTime(task.dueDate, timeZone); // Convert the date into user time zone
+  let formattedDate = format(zonedDate, "EEEE, MMM dd"); // May add 'yyyy' if needed
 
-  // Top row of the list item
-  let listTopRow = document.createElement("span");
-  listTopRow.className = "listTopRow";
+  if (isToday(zonedDate)) dueDateDisplay.textContent = "Today";
+  else if (isTomorrow(zonedDate)) dueDateDisplay.textContent = "Tomorrow";
+  else if (isYesterday(zonedDate)) dueDateDisplay.textContent = "Yesterday";
+  else {
+    dueDateDisplay.textContent = `${formattedDate}`;
+  }
+};
 
-  // 4 elements to add into list top row
-  let checkbox = document.createElement("input");
-  checkbox.setAttribute("type", "checkbox");
-  checkbox.className = "checkbox";
+// Utility function to create a date picker for a task
+const createDatePicker = (task) => {
+  let calendarButton = document.createElement("input");
+  calendarButton.setAttribute("type", "date");
+  calendarButton.className = "calendarButton";
+  calendarButton.setAttribute("value", task.dueDate);
 
-  let taskName = document.createElement("span");
-  taskName.className = "taskName";
-  taskName.textContent = task.taskName;
+  calendarButton.addEventListener("change", (e) => {
+    task.dueDate = e.target.value;
 
-  let taskRemoveButton = document.createElement("button");
-  taskRemoveButton.setAttribute("aria-label", "Remove task");
-  taskRemoveButton.className = "taskRemoveButton";
-  taskRemoveButton.innerHTML = `&#x1F5D1;`;
+    // NOTE: IN THE FUTURE, THIS SHOULD UPDATE A CENTRAL TASK MANAGER
+    // AND TRIGGER A RE-RENDER OF THE TASK LIST
+  });
+  return calendarButton;
+};
 
-  // Display priority button that allows changing priority
-  // update task.priority if changed
+// Utility function to create flag display
+const createFlag = (task) => {
   let option0 = document.createElement("option");
   option0.className = "noPriority";
   let option1 = document.createElement("option");
@@ -54,17 +60,13 @@ let displayTask = function (task) {
   option2.innerHTML = "&#127987;";
   option3.innerHTML = "&#127987;";
 
-  let flagSelection = document.createElement("select"); // the <select> to hold 3 options
+  let flagSelection = document.createElement("select");
   flagSelection.className = "flagSelection";
 
-  let selectionDiv = document.createElement("div"); // the div to hold flag seclection
-  selectionDiv.className = "selectionDiv";
-
   flagSelection.append(option0, option1, option2, option3);
-  selectionDiv.appendChild(flagSelection);
 
+  // Set default flag based on user's intial priority choice
   if (task.priority === "high") {
-    // set default flag based on user's intial priority choice
     option1.selected = true;
     flagSelection.style.backgroundColor = "var(--high-priority-color)";
   } else if (task.priority === "medium") {
@@ -77,9 +79,12 @@ let displayTask = function (task) {
     option0.selected = true;
     flagSelection.style.backgroundColor = "var(--no-priority-color)";
   }
+  return flagSelection;
+};
 
+// Utility function to update Flag and task.priority
+const updateFlag = (task, flagSelection) => {
   flagSelection.addEventListener("change", (e) => {
-    // change priority flag and update task.priority
     console.log("<select> obj", e.target.selectedOptions);
     let choice = e.target.selectedOptions[0].className;
 
@@ -98,9 +103,39 @@ let displayTask = function (task) {
     }
     console.log(task.priority); // confirm task.priority is updated
   });
+};
+
+// Function to display each task
+let displayTask = function (task) {
+  let taskList = document.querySelector(".taskList");
+  let listItem = document.createElement("li");
+
+  // Top row of the list item
+  let listTopRow = document.createElement("span");
+  listTopRow.className = "listTopRow";
+
+  // 4 elements to add into list top row: check box, task name, priority flag, remove buttons
+  let checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.className = "checkbox";
+
+  let taskName = document.createElement("span");
+  taskName.className = "taskName";
+  taskName.textContent = task.taskName;
+
+  let taskRemoveButton = document.createElement("button");
+  taskRemoveButton.setAttribute("aria-label", "Remove task");
+  taskRemoveButton.className = "taskRemoveButton";
+  taskRemoveButton.innerHTML = `&#x1F5D1;`;
+
+  // Display priority flag
+  let flagSelection = createFlag(task);
+
+  // Allow changing priority flag and update task.priority
+  updateFlag(task, flagSelection);
 
   // Finally, append 4 elements into listTopRow
-  listTopRow.append(checkbox, taskName, selectionDiv, taskRemoveButton);
+  listTopRow.append(checkbox, taskName, flagSelection, taskRemoveButton);
 
   // Second row of task item: task description
   let taskDescription = document.createElement("p");
@@ -108,47 +143,17 @@ let displayTask = function (task) {
   taskDescription.textContent = task.taskDescription;
 
   // Third row of task item: due date and date picker button
-
   let listThirdRow = document.createElement("div");
   listThirdRow.className = "listThirdRow";
 
   let dueDateDisplay = document.createElement("p");
   dueDateDisplay.className = "dueDateDisplay";
 
-  // Function to format task.dueDate to display
-  let setDueDate = () => {
-    let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get the user's local time zone
-    let zonedDate = toZonedTime(task.dueDate, timeZone); // Convert the date into user time zone
-    let formattedDate = format(zonedDate, "EEEE, MMM dd");
-    // let formattedDate = format(zonedDate, "eeee - MMM dd, yyyy"); // is year necessary?
+  setDueDate(task, dueDateDisplay);
 
-    if (isToday(zonedDate)) dueDateDisplay.textContent = "Today";
-    else if (isTomorrow(zonedDate)) dueDateDisplay.textContent = "Tomorrow";
-    else if (isYesterday(zonedDate)) dueDateDisplay.textContent = "Yesterday";
-    else {
-      dueDateDisplay.textContent = `${formattedDate}`;
-    }
-  };
-
-  setDueDate();
-
-  // Calendar button
-  let calendarButtonDiv = document.createElement("div");
-  calendarButtonDiv.className = "calendarButtonDiv";
-  let calendarButton = document.createElement("input");
-  calendarButton.setAttribute("type", "date");
-  calendarButton.className = "calendarButton";
-
-  calendarButton.setAttribute("value", task.dueDate);
-  console.log("Calendar Button: ", calendarButton);
-
-  // calendarButtonDiv.appendChild(calendarButton);
-
-  calendarButton.addEventListener("change", (e) => {
-    // select new due date and update the display
-    console.log(calendarButton.value);
-    task.dueDate = calendarButton.value;
-    setDueDate();
+  let calendarButton = createDatePicker(task);
+  calendarButton.addEventListener("change", () => {
+    setDueDate(task, dueDateDisplay);
   });
 
   listThirdRow.append(calendarButton, dueDateDisplay);
@@ -191,4 +196,12 @@ let removeTask = function (removeButton) {
   });
 };
 
-export { createTask, displayTask, removeTask };
+export {
+  createTask,
+  displayTask,
+  removeTask,
+  setDueDate,
+  createDatePicker,
+  createFlag,
+  updateFlag,
+};

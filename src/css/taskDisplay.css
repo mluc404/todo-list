@@ -33,13 +33,6 @@
 
   position: relative;
 }
-/* .selectionDialog {
-  position: absolute;
-  translate: 100px 50px;
-  background-color: rgba(0, 0, 255, 0);
-  margin-right: 50px;
-  transform: translateY(30px);
-} */
 
 .flagSelection {
   appearance: none;
