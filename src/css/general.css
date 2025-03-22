@@ -1,7 +1,11 @@
 /* GENRAL STYLING - MAIN LAYOUT */
 
+:root {
+  --main-bg-color: rgb(255, 251, 232);
+}
+
 body {
-  background-color: rgb(255, 251, 232);
+  background-color: var(--main-bg-color);
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 

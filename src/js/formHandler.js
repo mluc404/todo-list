@@ -19,7 +19,8 @@ const initForm = () => {
     if (choice === "high") priorityChoice.style.backgroundColor = "#e77b50";
     else if (choice === "medium")
       priorityChoice.style.backgroundColor = "#fdc04e";
-    else priorityChoice.style.backgroundColor = "#6dbbda";
+    else if (choice === "low") priorityChoice.style.backgroundColor = "#6dbbda";
+    else priorityChoice.style.backgroundColor = "var(--dialog-bg-color, white)";
   });
 
   // Handle form submission
@@ -29,7 +30,8 @@ const initForm = () => {
     e.preventDefault();
     let task = createTask();
     displayTask(task);
-    selectPriority.style.backgroundColor = "#e77b50"; // reset to default: High - orange
+    console.log(`task initial priority: ${task.priority}`);
+    selectPriority.style.backgroundColor = "var(--dialog-bg-color, white)"; // reset to default None
     form.reset();
   });
 

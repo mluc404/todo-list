@@ -26,7 +26,6 @@
   grid-template-columns: 20px 1fr 30px 30px;
   align-items: center;
   /* justify-items: center; */
-
   gap: 15px;
 
   font-size: 1.1rem;
@@ -46,28 +45,14 @@
   appearance: none;
   width: 30px;
   height: 30px;
-  /* border: grey solid 1px; */
+  border: grey solid 1px;
   border-radius: 2px;
   cursor: pointer;
   font-size: 1.1rem;
 
   text-align: center;
   outline: none;
-
-  /* background: lime !important; */
 }
-.flagSelection .medPriority {
-  /* background: lime; */
-}
-
-/* .priorityDisplay {
-  border: red solid 1px;
-  width: fit-content;
-  padding: 0 5px;
-  font-weight: 500;
-
-  border-radius: 3px;
-} */
 
 .taskRemoveButton {
   font-size: 1.2rem;
@@ -76,6 +61,10 @@
   text-align: center;
   width: 30px;
   height: 30px;
+
+  background-color: transparent;
+  border: grey solid 1px;
+  border-radius: 2px;
 }
 
 .checkbox {
@@ -100,9 +89,9 @@ li {
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 5px;
+  gap: 2px;
 
-  margin: 0 0 0 35px;
+  margin: 0 0 0 30px;
 }
 
 /* due date */
@@ -114,21 +103,23 @@ li {
 
 /* Calendar Button */
 .calendarButton {
-  height: 25px;
-  font-size: 1rem;
   width: 25px;
-  color: skyblue; /* set text color same with bg */
-  cursor: pointer; /* need a work around later to make this work*/
+  /* height: 25px; */
 
-  padding-right: 1px; /* manually center the icon */
-
-  background-color: skyblue;
-  border: grey solid 1px;
+  color: transparent; /* set text transparent */
+  overflow: hidden;
+  background-color: transparent;
+  border: transparent;
   border-radius: 2px;
 }
 
 .calendarButton::-webkit-calendar-picker-indicator {
-  background-color: skyblue; /* set icon color */
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.8;
+  font-size: 1.3rem;
+  padding: 0;
+  /* border: red solid 2px; */
 }
 
 /* //////////////////////////////////////////// */

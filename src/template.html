@@ -16,7 +16,7 @@
             class="mainNav"
           >
             <div class="todayTab">
-              <button class="todayTabButton">Today</button>
+              <button class="todayTabButton">Todos</button>
             </div>
 
             <div class="projectsTab">
@@ -60,10 +60,22 @@
                   value="2222-02-22"
                 />
                 <div class="priorityDiv">
-                  <label for="priorityChoice" id="priorityFlag"
+                  <!-- <label for="priorityChoice" id="priorityFlag"
                     >&#x1F3F3;</label
-                  >
+                  > -->
                   <select name="priorityChoice" id="priorityChoice">
+                    <!-- <option
+                      value="select-priority"
+                      class="selectPriority"
+                      disabled="true"
+                      selected="true"
+                      hidden="true"
+                    >
+                      Priority
+                    </option> -->
+                    <option value="no-priority" class="noPriority">
+                      No Priority
+                    </option>
                     <option value="high" class="highPriority">High</option>
                     <option value="medium" class="medPriority">Medium</option>
                     <option value="low" class="lowPriority">Low</option>

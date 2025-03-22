@@ -40,12 +40,16 @@ let displayTask = function (task) {
 
   // Display priority button that allows changing priority
   // update task.priority if changed
+  let option0 = document.createElement("option");
+  option0.className = "noPriority";
   let option1 = document.createElement("option");
   option1.className = "highPriority";
   let option2 = document.createElement("option");
   option2.className = "medPriority";
   let option3 = document.createElement("option");
   option3.className = "lowPriority";
+
+  option0.innerHTML = "&#127987;";
   option1.innerHTML = "&#127987;";
   option2.innerHTML = "&#127987;";
   option3.innerHTML = "&#127987;";
@@ -56,34 +60,41 @@ let displayTask = function (task) {
   let selectionDiv = document.createElement("div"); // the div to hold flag seclection
   selectionDiv.className = "selectionDiv";
 
-  flagSelection.append(option1, option2, option3);
+  flagSelection.append(option0, option1, option2, option3);
   selectionDiv.appendChild(flagSelection);
 
   if (task.priority === "high") {
     // set default flag based on user's intial priority choice
     option1.selected = true;
-    flagSelection.style.backgroundColor = "#e77b50";
+    flagSelection.style.backgroundColor = "var(--high-priority-color)";
   } else if (task.priority === "medium") {
     option2.selected = true;
-    flagSelection.style.backgroundColor = "#fdc04e";
+    flagSelection.style.backgroundColor = "var(--med-priority-color)";
   } else if (task.priority === "low") {
     option3.selected = true;
-    flagSelection.style.backgroundColor = "#6dbbda";
+    flagSelection.style.backgroundColor = "var(--low-priority-color)";
+  } else {
+    option0.selected = true;
+    flagSelection.style.backgroundColor = "var(--no-priority-color)";
   }
 
   flagSelection.addEventListener("change", (e) => {
     // change priority flag and update task.priority
     console.log("<select> obj", e.target.selectedOptions);
     let choice = e.target.selectedOptions[0].className;
+
     if (choice === "highPriority") {
-      flagSelection.style.backgroundColor = "#e77b50";
+      flagSelection.style.backgroundColor = "var(--high-priority-color)";
       task.priority = "high";
     } else if (choice === "medPriority") {
-      flagSelection.style.backgroundColor = "#fdc04e";
+      flagSelection.style.backgroundColor = "var(--med-priority-color)";
       task.priority = "medium";
+    } else if (choice === "lowPriority") {
+      flagSelection.style.backgroundColor = "var(--low-priority-color)";
+      task.priority = "lowPriority";
     } else {
-      flagSelection.style.backgroundColor = "#6dbbda";
-      task.priority = "low";
+      flagSelection.style.backgroundColor = "var(--no-priority-color)";
+      task.priority = "noPriority";
     }
     console.log(task.priority); // confirm task.priority is updated
   });
@@ -131,7 +142,7 @@ let displayTask = function (task) {
   calendarButton.setAttribute("value", task.dueDate);
   console.log("Calendar Button: ", calendarButton);
 
-  calendarButtonDiv.appendChild(calendarButton);
+  // calendarButtonDiv.appendChild(calendarButton);
 
   calendarButton.addEventListener("change", (e) => {
     // select new due date and update the display
@@ -140,7 +151,7 @@ let displayTask = function (task) {
     setDueDate();
   });
 
-  listThirdRow.append(calendarButtonDiv, dueDateDisplay);
+  listThirdRow.append(calendarButton, dueDateDisplay);
 
   // Append top row, second and third rows into list item
   listItem.append(listTopRow, taskDescription, listThirdRow);
