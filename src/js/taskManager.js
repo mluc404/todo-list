@@ -14,6 +14,7 @@
 // Filter tasks by due date
 
 ////////////////////////////////////////////////////
+import { format, isMatch, isToday } from "date-fns";
 
 // Store tasks and projects in arrays
 const tasks = [];
@@ -57,6 +58,39 @@ const removeTask = (task) => {
   }
 };
 
+//Get tasks due today
+const getTasksDueToday = () => {
+  // define today's date
+  // filter the tasks the have task.dueDate === today's date
+  const todayDate = format(new Date(), "yyyy-MM-dd");
+  const todayTasks = tasks.filter((task) => {
+    task.dueDate === todayDate;
+  });
+  return todayTasks;
+};
+
+// Filter tasks by priority
+const filterTasksByPriority = (priority) => {
+  return tasks.filter((task) => {
+    task.priority === priority;
+  });
+};
+
+// Filter tasks by due date
+const filterTasksByDueDate = (dueDate) => {
+  if (!isMatch(dueDate, "yyyy-MM-dd")) {
+    // check if the given dueDate is properly formatted before filtering
+    dueDate = format(dueDate, "yyyy-MM-dd");
+  }
+  return tasks.filter((task) => task.dueDate === dueDate);
+};
+
+// Get tasks for a project
+const getTasksForProject = (projectName) => {
+  const project = projects.find((p) => p.name === projectName);
+  return project ? project.tasks : []; // return tasks of project or an empty array if project DNE
+};
+
 // Add project
 const addProject = (project) => {
   projects.push(project);
@@ -83,7 +117,11 @@ export {
   assignTaskToProject,
   removeTask,
   getAllTasks,
+  getTasksDueToday,
+  filterTasksByDueDate,
+  filterTasksByPriority,
   addProject,
+  getTasksForProject,
   removeProject,
   getAllProjects,
 };
