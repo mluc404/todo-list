@@ -43,19 +43,21 @@ const assignTaskToProject = (task) => {
 const removeTask = (task) => {
   // remove from task array
   const taskIndex = tasks.indexOf(task);
+  console.log("here", taskIndex);
   if (taskIndex !== -1) {
-    task.splice(taskIndex, 1);
+    tasks.splice(taskIndex, 1);
+    console.log(tasks);
   }
   // remove from associated project
-  if (task.project !== null) {
-    const currentProject = projects.find((p) => p.name === task.project);
-    if (currentProject) {
-      const projTaskIndex = currentProject.tasks.indexOf(task);
-      if (projTaskIndex !== -1) {
-        currentProject.tasks.splice(projTaskIndex, 1);
-      }
-    }
-  }
+  // if (task.project !== null) {
+  //   const currentProject = projects.find((p) => p.name === task.project);
+  //   if (currentProject) {
+  //     const projTaskIndex = currentProject.tasks.indexOf(task);
+  //     if (projTaskIndex !== -1) {
+  //       currentProject.tasks.splice(projTaskIndex, 1);
+  //     }
+  //   }
+  // }
 };
 
 //Get tasks due today

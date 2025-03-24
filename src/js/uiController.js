@@ -42,6 +42,17 @@ const initUI = () => {
     todoPage.style.display = "block";
     todayPage.style.display = "none";
     projectPage.style.display = "none";
+
+    // Display all available tasks
+    const divToDisplay = document.querySelector(
+      ".taskContainer.todoTaskContainer"
+    );
+    const ulInsideDiv = divToDisplay.querySelector("ul");
+    ulInsideDiv.innerHTML = "";
+    const todoTasks = getAllTasks();
+    todoTasks.forEach((task) => {
+      displayTask(task, divToDisplay);
+    });
   });
 };
 

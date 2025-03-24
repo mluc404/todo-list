@@ -1,6 +1,6 @@
 // This module handle the functionality inside the task creation input form
 
-import { createTask, displayTask, removeTask } from "./taskHandler.js";
+import { createTask, displayTask, removeTaskDisplay } from "./taskHandler.js";
 import { format } from "date-fns";
 
 import {

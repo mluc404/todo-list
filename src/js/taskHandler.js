@@ -2,6 +2,7 @@
 
 import { format, isToday, isTomorrow, isYesterday } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
+import { removeTask } from "./taskManager";
 
 // Function to get form inputs to create a task object
 let createTask = function () {
@@ -171,7 +172,7 @@ let displayTask = function (task, divToDisplay) {
   taskList.append(listItem, divider);
 
   // Activate Remove Task button functionality
-  removeTask(taskRemoveButton);
+  removeTaskDisplay(task, taskRemoveButton);
 
   // Add checkbox functionality
   checkbox.addEventListener("change", (e) => {
@@ -184,7 +185,7 @@ let displayTask = function (task, divToDisplay) {
 };
 
 // Function to remove task
-let removeTask = function (removeButton) {
+let removeTaskDisplay = function (task, removeButton) {
   let taskToRemove = removeButton.parentElement.parentElement;
   let parentNode = taskToRemove.parentElement;
   let dividerToRemove = taskToRemove.nextElementSibling;
@@ -195,13 +196,15 @@ let removeTask = function (removeButton) {
       // make sure only remove if it exist
       parentNode.removeChild(dividerToRemove);
     }
+    // remove task inside task manager
+    removeTask(task);
   });
 };
 
 export {
   createTask,
   displayTask,
-  removeTask,
+  removeTaskDisplay,
   setDueDate,
   createDatePicker,
   createFlag,
