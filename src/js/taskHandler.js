@@ -12,7 +12,9 @@ let createTask = function () {
   let dueDate = document.querySelector("#dueDate").value;
   let priority = document.querySelector("#priorityChoice").value;
 
-  return { taskName, taskDescription, dueDate, priority };
+  let checked = false;
+
+  return { taskName, taskDescription, dueDate, priority, checked };
 };
 
 // Utility function to format and set the due date display
@@ -122,6 +124,26 @@ let displayTask = function (task, divToDisplay) {
   checkbox.setAttribute("type", "checkbox");
   checkbox.className = "checkbox";
 
+  // Add checkbox functionality
+  if (task.checked) {
+    listItem.className = "completed";
+    checkbox.setAttribute("checked", "true");
+  } else {
+    listItem.className = "";
+    // checkbox.setAttribute("checked", "false");
+    checkbox.removeAttribute("checked");
+  }
+
+  checkbox.addEventListener("change", (e) => {
+    if (e.target.checked) {
+      listItem.className = "completed";
+      task.checked = true;
+    } else {
+      listItem.className = "";
+      task.checked = false;
+    }
+  });
+
   let taskName = document.createElement("span");
   taskName.className = "taskName";
   taskName.textContent = task.taskName;
@@ -173,15 +195,6 @@ let displayTask = function (task, divToDisplay) {
 
   // Activate Remove Task button functionality
   removeTaskDisplay(task, taskRemoveButton);
-
-  // Add checkbox functionality
-  checkbox.addEventListener("change", (e) => {
-    if (e.target.checked) {
-      listItem.className = "completed";
-    } else {
-      listItem.className = "";
-    }
-  });
 };
 
 // Function to remove task
