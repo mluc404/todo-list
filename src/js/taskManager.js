@@ -63,17 +63,7 @@ const getTasksDueToday = () => {
   // define today's date
   // filter the tasks the have task.dueDate === today's date
   const todayDate = format(new Date(), "yyyy-MM-dd");
-  const todayTasks = tasks.filter((task) => {
-    task.dueDate === todayDate;
-  });
-  return todayTasks;
-};
-
-// Filter tasks by priority
-const filterTasksByPriority = (priority) => {
-  return tasks.filter((task) => {
-    task.priority === priority;
-  });
+  return tasks.filter((task) => task.dueDate === todayDate);
 };
 
 // Filter tasks by due date
@@ -83,6 +73,11 @@ const filterTasksByDueDate = (dueDate) => {
     dueDate = format(dueDate, "yyyy-MM-dd");
   }
   return tasks.filter((task) => task.dueDate === dueDate);
+};
+
+// Filter tasks by priority
+const filterTasksByPriority = (priority) => {
+  return tasks.filter((task) => task.priority === priority);
 };
 
 // Get tasks for a project

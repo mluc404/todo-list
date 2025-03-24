@@ -15,8 +15,11 @@
             aria-label="Main Navigation: contains Today Task List, Projects, Labels, and Filters"
             class="mainNav"
           >
+            <div class="todoTab">
+              <button class="todoTabButton">Todos</button>
+            </div>
             <div class="todayTab">
-              <button class="todayTabButton">Todos</button>
+              <button class="todayTabButton">Today</button>
             </div>
 
             <div class="projectsTab">
@@ -27,9 +30,9 @@
       </div>
 
       <div class="mainSection">
-        <div class="todayPage">
+        <div class="todoPage">
           <h1>Todo List</h1>
-          <div class="taskContainer">
+          <div class="taskContainer todoTaskContainer">
             <ul class="taskList">
               <li>
                 <span class="listTopRow">
@@ -73,7 +76,7 @@
                     >
                       Priority
                     </option> -->
-                    <option value="no-priority" class="noPriority">
+                    <option value="noPriority" class="noPriority">
                       No Priority
                     </option>
                     <option value="high" class="highPriority">High</option>
@@ -92,6 +95,13 @@
               </div>
             </form>
           </dialog>
+        </div>
+
+        <div class="todayPage">
+          <h1>Today</h1>
+          <div class="taskContainer todayTaskContainer">
+            <ul class="taskList"></ul>
+          </div>
         </div>
 
         <div class="projectPage"><h1>Projects Page</h1></div>

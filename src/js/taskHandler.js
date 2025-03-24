@@ -65,7 +65,7 @@ const createFlag = (task) => {
   flagSelection.className = "flagSelection";
   flagSelection.setAttribute("aria-label", "Change task priority");
 
-  flagSelection.append(option0, option1, option2, option3);
+  flagSelection.append(option1, option2, option3, option0);
 
   // Set default flag based on user's intial priority choice
   if (task.priority === "high") {
@@ -98,7 +98,7 @@ const updateFlag = (task, flagSelection) => {
       task.priority = "medium";
     } else if (choice === "lowPriority") {
       flagSelection.style.backgroundColor = "var(--low-priority-color)";
-      task.priority = "lowPriority";
+      task.priority = "low";
     } else {
       flagSelection.style.backgroundColor = "var(--no-priority-color)";
       task.priority = "noPriority";
@@ -108,8 +108,8 @@ const updateFlag = (task, flagSelection) => {
 };
 
 // Function to display each task
-let displayTask = function (task) {
-  let taskList = document.querySelector(".taskList");
+let displayTask = function (task, divToDisplay) {
+  let taskList = divToDisplay.querySelector(".taskList");
   let listItem = document.createElement("li");
 
   // Top row of the list item

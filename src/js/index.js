@@ -20,12 +20,3 @@ let removeSampleTask = (function () {
     taskList.removeChild(dividerToRemove);
   });
 })();
-
-import { isToday } from "date-fns";
-import { toZonedTime } from "date-fns-tz";
-
-let date = "2025-03-22";
-
-let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get the user's local time zone
-let zonedDate = toZonedTime(date, timeZone);
-console.log(`is today?  ${isToday(zonedDate)}`);

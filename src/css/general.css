@@ -46,6 +46,14 @@ nav {
   padding: 5%;
 }
 
+.todoPage {
+  display: block;
+}
+
+.todayPage {
+  display: none;
+}
+
 .projectPage {
   display: none;
 }

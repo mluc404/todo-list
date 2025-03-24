@@ -3,7 +3,13 @@
 import { createTask, displayTask, removeTask } from "./taskHandler.js";
 import { format } from "date-fns";
 
-import { addTask, getAllTasks } from "./taskManager.js";
+import {
+  addTask,
+  getAllTasks,
+  filterTasksByDueDate,
+  filterTasksByPriority,
+  getTasksDueToday,
+} from "./taskManager.js";
 
 // Initialize form
 const initForm = () => {
@@ -31,13 +37,29 @@ const initForm = () => {
   formSubmitButton.addEventListener("click", (e) => {
     e.preventDefault();
     let task = createTask();
-    displayTask(task);
+    const divToDisplay = document.querySelector(
+      ".taskContainer.todoTaskContainer"
+    );
+    console.log(divToDisplay);
+    displayTask(task, divToDisplay);
     console.log(`task initial priority: ${task.priority}`);
-    // Testing add task to storage
+
+    // Testing new functions from taskManager
+    // Add the newly created task into taskManager
     addTask(task);
-    let allTasks = getAllTasks();
-    console.log(allTasks[0]);
-    console.table(allTasks[0]);
+    // let allTasks = getAllTasks();
+    // console.table(allTasks);
+
+    // let todayTasks = getTasksDueToday();
+    // console.table(todayTasks);
+
+    // let randomDate = "2025-05-25";
+    // let arr = filterTasksByDueDate(randomDate);
+    // console.table(arr);
+
+    // let arr = filterTasksByPriority("high");
+    // console.table(filterTasksByPriority("high"));
+
     selectPriority.style.backgroundColor = "var(--dialog-bg-color, white)"; // reset to default None
     form.reset();
   });
