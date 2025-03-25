@@ -116,40 +116,41 @@
         </div>
 
         <div class="projectPage">
-          <h1>Projects Page</h1>
+          <h1>Projects</h1>
           <button class="addProjectButton">+Project</button>
           <div class="projectContainer">
             <ul class="taskList" id="projectList"></ul>
           </div>
 
-          <!-- <dialog> -->
-          <form class="projectForm" action="">
-            <input
-              type="text"
-              id="projectName"
-              class="entryName"
-              placeholder="Project name"
-            />
-            <input
-              type="text"
-              id="projectDescription"
-              class="entryDescription"
-              placeholder="Description"
-            />
-            <div class="spacer"></div>
-            <div class="taskUtils">
-              <button class="addToProject">Assign tasks</button>
-            </div>
-            <div class="spacer"></div>
-            <div class="divider"></div>
-            <div class="spacer"></div>
-            <div class="addOrCancel">
-              <button class="closeFormButton">Cancel</button>
-              <button id="projectFormSubmitButton">Create Project</button>
-            </div>
-          </form>
-
-          <!-- </dialog> -->
+          <dialog class="projectDialog">
+            <form class="projectForm" action="">
+              <input
+                type="text"
+                id="projectName"
+                class="entryName"
+                placeholder="Project name"
+              />
+              <input
+                type="text"
+                id="projectDescription"
+                class="entryDescription"
+                placeholder="Description"
+              />
+              <div class="spacer"></div>
+              <div class="taskUtils">
+                <button class="addToProject">Assign tasks</button>
+              </div>
+              <div class="spacer"></div>
+              <div class="divider"></div>
+              <div class="spacer"></div>
+              <div class="addOrCancel">
+                <button class="closeFormButton closeProjectFormButton">
+                  Cancel
+                </button>
+                <button id="projectFormSubmitButton">Create Project</button>
+              </div>
+            </form>
+          </dialog>
         </div>
       </div>
     </div>

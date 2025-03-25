@@ -25,14 +25,14 @@ const initUI = () => {
     todayPage.style.display = "none";
     todoPage.style.display = "none";
 
-    // const divToDisplay = document.querySelector(".projectContainer");
-    // const projects = getAllProjects();
+    const divToDisplay = document.querySelector(".projectContainer");
+    const projects = getAllProjects();
 
-    // const ulInsideDiv = divToDisplay.querySelector("ul");
-    // ulInsideDiv.innerHTML = "";
-    // projects.forEach((project) => {
-    //   displayProject(project, divToDisplay);
-    // });
+    const ulInsideDiv = divToDisplay.querySelector("ul");
+    ulInsideDiv.innerHTML = "";
+    projects.forEach((project) => {
+      displayProject(project, divToDisplay);
+    });
   });
 
   todayTabButton.addEventListener("click", () => {

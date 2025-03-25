@@ -60,6 +60,17 @@ const initForm = () => {
     // Add the task to project
     assignTaskToProject(task);
 
+    // Render task in project page
+    // const projectList = document.querySelector("#projectList");
+    // // find the <li> that has id = task.project or id = assignedProject.name
+    // const listItem = document.querySelector(#${task.project});
+    // console.log(listItem);
+    // const tasksInProject = listItem.querySelector("#tasksInProject");
+    // const listItemInside = document.createElement("li");
+    // listItemInside.className = "taskList";
+    // tasksInProject.appendChild(listItemInside);
+    // displayTask(task, tasksInProject);
+
     // let allTasks = getAllTasks();
     // console.table(allTasks);
 

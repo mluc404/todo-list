@@ -7,3 +7,16 @@
   align-self: center;
   /* width: 80%; */
 }
+
+.projectContainer .projectListTopRow {
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  align-items: center;
+  /* justify-items: center; */
+  gap: 15px;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  position: relative;
+}

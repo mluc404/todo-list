@@ -56,8 +56,8 @@ const initProjectForm = () => {
 
   // Open/close form dialog
   let addProjectButton = document.querySelector(".addProjectButton");
-  let closeFormButton = document.querySelector(".closeFormButton");
-  let dialog = document.querySelector("dialog");
+  let closeFormButton = document.querySelector(".closeProjectFormButton");
+  let dialog = document.querySelector(".projectDialog");
 
   addProjectButton.addEventListener("click", () => {
     dialog.showModal();

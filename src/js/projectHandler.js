@@ -24,6 +24,7 @@ let displayProject = function (project, divToDisplay) {
   // Top row of the list item
   let listTopRow = document.createElement("span");
   listTopRow.className = "listTopRow";
+  listTopRow.classList.add("projectListTopRow");
 
   // 4 elements to add into list top row: check box, task name, priority flag, remove buttons
   let checkbox = document.createElement("input");
