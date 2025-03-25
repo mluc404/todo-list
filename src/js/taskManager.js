@@ -70,8 +70,6 @@ const assignTaskToProject = (task) => {
   if (project) {
     project.tasks.push(task);
     task.project = project.name; // update new project in task
-    console.table(task);
-    console.table(project);
   }
   // Update projects in storage
   saveProjects();
@@ -80,22 +78,27 @@ const assignTaskToProject = (task) => {
 // Remove task
 const removeTask = (task) => {
   // remove from task array
-  const taskIndex = tasks.indexOf(task);
-  console.log("here", taskIndex);
+  const taskIndex = tasks.findIndex((t) => t.taskName === task.taskName);
   if (taskIndex !== -1) {
     tasks.splice(taskIndex, 1);
-    console.log(tasks);
+    saveTasks();
   }
   // remove from associated project
-  // if (task.project !== null) {
-  //   const currentProject = projects.find((p) => p.name === task.project);
-  //   if (currentProject) {
-  //     const projTaskIndex = currentProject.tasks.indexOf(task);
-  //     if (projTaskIndex !== -1) {
-  //       currentProject.tasks.splice(projTaskIndex, 1);
-  //     }
-  //   }
-  // }
+  if (task.project !== "Assign project") {
+    const currentProjectIndex = projects.findIndex(
+      (p) => p.name === task.project
+    );
+    if (currentProjectIndex !== -1) {
+      // const projTaskIndex = currentProject.tasks.indexOf(task);
+      const projTaskIndex = projects[currentProjectIndex].tasks.findIndex(
+        (t) => t.taskName === task.taskName
+      );
+      if (projTaskIndex !== -1) {
+        projects[currentProjectIndex].tasks.splice(projTaskIndex, 1);
+      }
+    }
+  }
+  saveProjects();
 };
 
 //Get tasks due today
@@ -151,23 +154,33 @@ const getAllProjects = () => {
 // Update tasks inside a project
 const updateTasksInProject = (task) => {
   // record the task changes inside Todo/Today pages to sync the Project page
-  const project = projects.find((p) => p.name === task.project);
-  const theTaskInProject = project.tasks.find(
-    (t) => t.taskName === task.taskName
-  );
-  if (theTaskInProject) {
-    theTaskInProject.dueDate = task.dueDate;
-    theTaskInProject.priority = task.priority;
-    theTaskInProject.checked = task.checked;
+  const projectIndex = projects.findIndex((p) => p.name === task.project);
+  if (projectIndex !== -1) {
+    const theTaskInProjectIndex = projects[projectIndex].tasks.findIndex(
+      (t) => t.taskName === task.taskName
+    );
+    if (theTaskInProjectIndex !== -1) {
+      projects[projectIndex].tasks[theTaskInProjectIndex].dueDate =
+        task.dueDate;
+      projects[projectIndex].tasks[theTaskInProjectIndex].priority =
+        task.priority;
+      projects[projectIndex].tasks[theTaskInProjectIndex].checked =
+        task.checked;
+    }
+    saveProjects();
   }
 
+  // saveTasks();
   // record the task changes inside Project page to sync the other pages
-  retrieveTasks();
-  const theTask = getAllTasks().find((t) => (t.taskName = task.taskName));
-  if (theTask) {
-    theTask.dueDate = task.dueDate;
-    theTask.priority = task.priority;
-    theTask.checked = task.checked;
+  // retrieveTasks();
+
+  const theTaskIndex = getAllTasks().findIndex(
+    (t) => t.taskName === task.taskName
+  );
+  if (theTaskIndex !== -1) {
+    tasks[theTaskIndex].dueDate = task.dueDate;
+    tasks[theTaskIndex].priority = task.priority;
+    tasks[theTaskIndex].checked = task.checked;
   }
   saveTasks();
 

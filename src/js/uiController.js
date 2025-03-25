@@ -95,6 +95,7 @@ const displayStoredProjects = () => {
   const ulInsideDiv = divToDisplay.querySelector("ul");
   ulInsideDiv.innerHTML = "";
   retrieveProjects();
+  retrieveTasks();
   const projects = getAllProjects();
   projects.forEach((project) => {
     displayProject(project, divToDisplay);

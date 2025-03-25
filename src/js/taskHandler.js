@@ -51,9 +51,9 @@ const createDatePicker = (task) => {
 
     // NOTE: IN THE FUTURE, THIS SHOULD UPDATE A CENTRAL TASK MANAGER
     // AND TRIGGER A RE-RENDER OF THE TASK LIST
-    saveTasks();
+    // saveTasks();
     updateTasksInProject(task);
-    saveProjects();
+    // saveProjects();
   });
   return calendarButton;
 };
@@ -120,9 +120,9 @@ const updateFlag = (task, flagSelection) => {
 
     // NOTE: IN THE FUTURE, THIS SHOULD UPDATE A CENTRAL TASK MANAGER
     // AND TRIGGER A RE-RENDER OF THE TASK LIST
-    saveTasks();
+    // saveTasks();
     updateTasksInProject(task);
-    saveProjects();
+    // saveProjects();
   });
 };
 
@@ -235,8 +235,12 @@ let removeTaskDisplay = function (task, removeButton) {
     }
     // remove task inside task manager
     removeTask(task);
-    // update task storage
+
+    // NOTE: IN THE FUTURE, THIS SHOULD UPDATE A CENTRAL TASK MANAGER
+    // AND TRIGGER A RE-RENDER OF THE TASK LIST
     saveTasks();
+    saveProjects();
+    // updateTasksInProject(task);
   });
 };
 

@@ -13,6 +13,7 @@ import {
   assignTaskToProject,
   saveTasks,
   saveProjects,
+  retrieveProjects,
 } from "./taskManager.js";
 
 // Initialize form
@@ -64,7 +65,9 @@ const initForm = () => {
     saveProjects();
 
     // Add the task to project
-    assignTaskToProject(task);
+    if (task.project !== "Assign project") {
+      assignTaskToProject(task);
+    }
 
     // Render task in project page
     // const projectList = document.querySelector("#projectList");
@@ -103,13 +106,32 @@ const initForm = () => {
     dialog.showModal();
     // Query all projects to generate options for 'Assign project' button
     let projectChoice = document.querySelector("#projectChoice");
-    projectChoice.innerHTML = "";
+    let currentOptions = projectChoice.querySelectorAll("option");
+    let optionNames = [];
+    currentOptions.forEach((option) => {
+      optionNames.push(option.textContent);
+    });
+    console.log("option names: ", optionNames);
+
+    retrieveProjects();
     let projects = getAllProjects();
+    console.log("retrieve projects:", projects);
+    // remove project options if the projects were removed before
+    currentOptions.forEach((option) => {
+      let foundOption = projects.find((p) => p.name === option.textContent);
+      if (!foundOption && option.textContent !== "Assign project") {
+        projectChoice.removeChild(option);
+      }
+    });
+
+    // add new project option
     projects.forEach((project) => {
-      console.log(project);
-      let option = document.createElement("option");
-      option.textContent = project.name;
-      projectChoice.appendChild(option);
+      let foundName = optionNames.find((name) => name === project.name);
+      if (!foundName) {
+        let option = document.createElement("option");
+        option.textContent = project.name;
+        projectChoice.appendChild(option);
+      }
     });
   });
 
