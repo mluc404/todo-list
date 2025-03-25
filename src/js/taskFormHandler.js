@@ -9,6 +9,8 @@ import {
   filterTasksByDueDate,
   filterTasksByPriority,
   getTasksDueToday,
+  getAllProjects,
+  assignTaskToProject,
 } from "./taskManager.js";
 
 // Initialize form
@@ -31,6 +33,13 @@ const initForm = () => {
     else priorityChoice.style.backgroundColor = "var(--dialog-bg-color, white)";
   });
 
+  // Handle assign to project
+  let projectChoice = document.querySelector("#projectChoice");
+  projectChoice.addEventListener("change", (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+  });
+
   // Handle form submission
   let formSubmitButton = document.querySelector("#formSubmitButton");
   let selectPriority = form.querySelector("select");
@@ -47,6 +56,10 @@ const initForm = () => {
     // Testing new functions from taskManager
     // Add the newly created task into taskManager
     addTask(task);
+
+    // Add the task to project
+    assignTaskToProject(task);
+
     // let allTasks = getAllTasks();
     // console.table(allTasks);
 
@@ -71,6 +84,16 @@ const initForm = () => {
 
   addTaskButton.addEventListener("click", () => {
     dialog.showModal();
+    // Query all projects to generate options for 'Assign project' button
+    let projectChoice = document.querySelector("#projectChoice");
+    projectChoice.innerHTML = "";
+    let projects = getAllProjects();
+    projects.forEach((project) => {
+      console.log(project);
+      let option = document.createElement("option");
+      option.textContent = project.name;
+      projectChoice.appendChild(option);
+    });
   });
 
   closeFormButton.addEventListener("click", (e) => {

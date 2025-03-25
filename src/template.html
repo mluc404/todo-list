@@ -48,10 +48,16 @@
           <button class="addTaskButton">+ Add Task</button>
           <dialog>
             <form action="">
-              <input type="text" id="taskName" placeholder="Task name" />
+              <input
+                type="text"
+                id="taskName"
+                class="entryName"
+                placeholder="Task name"
+              />
               <input
                 type="text"
                 id="taskDescription"
+                class="entryDescription"
                 placeholder="Description"
               />
               <div class="spacer"></div>
@@ -84,7 +90,12 @@
                     <option value="low" class="lowPriority">Low</option>
                   </select>
                 </div>
-                <button class="addToProject">Assign project</button>
+                <!-- Assign Project button -->
+                <!-- <button class="addToProject">Assign project</button> -->
+                <div class="priorityDiv">
+                  <label for="projectChoice">Assign project</label>
+                  <select name="projectChoice" id="projectChoice"></select>
+                </div>
               </div>
               <div class="spacer"></div>
               <div class="divider"></div>
@@ -104,7 +115,42 @@
           </div>
         </div>
 
-        <div class="projectPage"><h1>Projects Page</h1></div>
+        <div class="projectPage">
+          <h1>Projects Page</h1>
+          <button class="addProjectButton">+Project</button>
+          <div class="projectContainer">
+            <ul class="taskList" id="projectList"></ul>
+          </div>
+
+          <!-- <dialog> -->
+          <form class="projectForm" action="">
+            <input
+              type="text"
+              id="projectName"
+              class="entryName"
+              placeholder="Project name"
+            />
+            <input
+              type="text"
+              id="projectDescription"
+              class="entryDescription"
+              placeholder="Description"
+            />
+            <div class="spacer"></div>
+            <div class="taskUtils">
+              <button class="addToProject">Assign tasks</button>
+            </div>
+            <div class="spacer"></div>
+            <div class="divider"></div>
+            <div class="spacer"></div>
+            <div class="addOrCancel">
+              <button class="closeFormButton">Cancel</button>
+              <button id="projectFormSubmitButton">Create Project</button>
+            </div>
+          </form>
+
+          <!-- </dialog> -->
+        </div>
       </div>
     </div>
   </body>

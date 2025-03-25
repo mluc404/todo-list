@@ -1,0 +1,9 @@
+#tasksInProject {
+  display: flex;
+  flex-direction: column;
+}
+
+#tasksInProject .taskList {
+  align-self: center;
+  /* width: 80%; */
+}

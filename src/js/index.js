@@ -2,12 +2,15 @@ import "../css/general.css";
 import "../css/sidebar.css";
 import "../css/form.css";
 import "../css/taskDisplay.css";
-import { initForm } from "./formHandler.js";
+import "../css/projectPage.css";
+import { initForm } from "./taskFormHandler.js";
 import { initUI } from "./uiController.js";
+import { initProjectForm } from "./projectFormHandler.js";
 
 // Initialize the app
 initForm();
 initUI();
+initProjectForm();
 
 // Remove the sample task "Go get eggs"
 let removeSampleTask = (function () {

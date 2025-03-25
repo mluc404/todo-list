@@ -37,6 +37,11 @@ const assignTaskToProject = (task) => {
   const project = projects.find((p) => p.name === task.project);
   project.tasks.push(task);
   task.project = project.name; // update new project in task
+
+  console.table(task);
+  console.table(project);
+
+  return project;
 };
 
 // Remove task

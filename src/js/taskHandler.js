@@ -13,8 +13,9 @@ let createTask = function () {
   let priority = document.querySelector("#priorityChoice").value;
 
   let checked = false;
+  let project = document.querySelector("#projectChoice").value;
 
-  return { taskName, taskDescription, dueDate, priority, checked };
+  return { taskName, taskDescription, dueDate, priority, checked, project };
 };
 
 // Utility function to format and set the due date display

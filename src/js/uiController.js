@@ -1,7 +1,12 @@
 // This module handles UI interactions like page toggling
 
-import { getAllTasks, getTasksDueToday } from "./taskManager.js";
+import {
+  getAllProjects,
+  getAllTasks,
+  getTasksDueToday,
+} from "./taskManager.js";
 import { displayTask } from "./taskHandler.js";
+import { displayProject } from "./projectHandler.js";
 
 const initUI = () => {
   let todoPage = document.querySelector(".todoPage");
@@ -19,6 +24,15 @@ const initUI = () => {
     projectPage.style.display = "block";
     todayPage.style.display = "none";
     todoPage.style.display = "none";
+
+    // const divToDisplay = document.querySelector(".projectContainer");
+    // const projects = getAllProjects();
+
+    // const ulInsideDiv = divToDisplay.querySelector("ul");
+    // ulInsideDiv.innerHTML = "";
+    // projects.forEach((project) => {
+    //   displayProject(project, divToDisplay);
+    // });
   });
 
   todayTabButton.addEventListener("click", () => {

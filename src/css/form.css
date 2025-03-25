@@ -33,12 +33,12 @@ input[type="text"] {
   /* height: 20px; */
 }
 
-#taskName {
+.entryName {
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-#taskDescription {
+.entryDescription {
   font-size: 1.1rem;
 }
 
@@ -57,7 +57,7 @@ input:-webkit-autofill:focus {
   color: inherit !important;
 }
 
-#taskName::placeholder {
+.entryName::placeholder {
   font-weight: 600;
 }
 
