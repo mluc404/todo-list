@@ -14,11 +14,39 @@
 // Filter tasks by due date
 
 ////////////////////////////////////////////////////
-import { format, isMatch, isToday } from "date-fns";
+import { format, isMatch, isToday, parseJSON } from "date-fns";
+
+// Local storage for tasks and proj
+const saveTasks = () => {
+  const storedTasks = getAllTasks();
+  localStorage.setItem("myTasks", JSON.stringify(storedTasks));
+  const myTasks = JSON.parse(localStorage.getItem("myTasks"));
+  console.log(myTasks);
+};
+const retrieveTasks = () => {
+  return JSON.parse(localStorage.getItem("myTasks"));
+};
+const saveProjects = () => {
+  const storedProjects = getAllProjects();
+  localStorage.setItem("myProjects", JSON.stringify(storedProjects));
+  const myProjects = JSON.parse(localStorage.getItem("myProjects"));
+  console.log(myProjects);
+};
+const retrieveProjects = () => {
+  return JSON.parse(localStorage.getItem("myProjects"));
+};
 
 // Store tasks and projects in arrays
-const tasks = [];
-const projects = [{ name: "Default", tasks: [] }]; // default project
+// Retrieve stored tasks
+let tasks = [];
+let retrievedTasks = retrieveTasks();
+if (retrieveTasks) tasks = retrievedTasks;
+console.log("this is tasks: ", tasks);
+
+// Retrieve stored projects
+let projects = [{ name: "Default", tasks: [] }]; // default project
+let retrievedProjects = retrieveProjects();
+if (retrieveProjects) projects = retrievedProjects;
 
 // Add a task
 const addTask = (task) => {
@@ -30,18 +58,22 @@ const assignTaskToProject = (task) => {
   // remove from current project if assigned previously
   if (task.project !== null) {
     const currentProject = projects.find((p) => p.name === task.project);
-    const taskIndex = currentProject.tasks.indexOf(task);
-    if (taskIndex !== -1) currentProject.tasks.splice(taskIndex, 1);
+    if (currentProject) {
+      const taskIndex = currentProject.tasks.indexOf(task);
+      if (taskIndex !== -1) currentProject.tasks.splice(taskIndex, 1);
+    }
   }
   // Assign to new project
   const project = projects.find((p) => p.name === task.project);
-  project.tasks.push(task);
-  task.project = project.name; // update new project in task
+  if (project) {
+    project.tasks.push(task);
+    task.project = project.name; // update new project in task
 
-  console.table(task);
-  console.table(project);
+    console.table(task);
+    console.table(project);
+  }
 
-  return project;
+  return;
 };
 
 // Remove task
@@ -114,6 +146,8 @@ const getAllProjects = () => {
   return projects;
 };
 
+// const storedProjects = getAllProjects();
+
 export {
   addTask,
   assignTaskToProject,
@@ -126,4 +160,6 @@ export {
   getTasksForProject,
   removeProject,
   getAllProjects,
+  saveTasks,
+  saveProjects,
 };

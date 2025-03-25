@@ -1,4 +1,4 @@
-import { removeProject, getTasksForProject } from "./taskManager";
+import { removeProject, getTasksForProject, saveProjects } from "./taskManager";
 import { displayTask } from "./taskHandler";
 
 let createProject = function () {
@@ -142,6 +142,9 @@ let removeProjectDisplay = function (project, removeButton) {
     }
     // remove project inside project manager
     removeProject(project);
+
+    // update project in local storage
+    saveProjects();
   });
 };
 

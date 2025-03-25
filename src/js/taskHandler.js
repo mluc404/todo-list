@@ -2,7 +2,7 @@
 
 import { format, isToday, isTomorrow, isYesterday } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
-import { removeTask } from "./taskManager";
+import { removeTask, saveTasks, getAllTasks } from "./taskManager";
 
 // Function to get form inputs to create a task object
 let createTask = function () {
@@ -212,6 +212,8 @@ let removeTaskDisplay = function (task, removeButton) {
     }
     // remove task inside task manager
     removeTask(task);
+    // update task storage
+    saveTasks();
   });
 };
 

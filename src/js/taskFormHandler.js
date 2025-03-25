@@ -11,6 +11,7 @@ import {
   getTasksDueToday,
   getAllProjects,
   assignTaskToProject,
+  saveTasks,
 } from "./taskManager.js";
 
 // Initialize form
@@ -56,6 +57,9 @@ const initForm = () => {
     // Testing new functions from taskManager
     // Add the newly created task into taskManager
     addTask(task);
+
+    // Update local storage
+    saveTasks();
 
     // Add the task to project
     assignTaskToProject(task);

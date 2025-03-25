@@ -1,5 +1,5 @@
 import { createProject, displayProject } from "./projectHandler";
-import { addProject, getAllProjects } from "./taskManager";
+import { addProject, getAllProjects, saveProjects } from "./taskManager";
 
 // Initialize form
 const initProjectForm = () => {
@@ -36,6 +36,9 @@ const initProjectForm = () => {
     // Add the newly created task into taskManager
     addProject(project);
     console.log(getAllProjects());
+
+    // Save project to local storage
+    saveProjects();
 
     // let allTasks = getAllTasks();
     // console.table(allTasks);

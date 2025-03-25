@@ -25,14 +25,16 @@ const initUI = () => {
     todayPage.style.display = "none";
     todoPage.style.display = "none";
 
-    const divToDisplay = document.querySelector(".projectContainer");
-    const projects = getAllProjects();
+    // const divToDisplay = document.querySelector(".projectContainer");
+    // const projects = getAllProjects();
 
-    const ulInsideDiv = divToDisplay.querySelector("ul");
-    ulInsideDiv.innerHTML = "";
-    projects.forEach((project) => {
-      displayProject(project, divToDisplay);
-    });
+    // const ulInsideDiv = divToDisplay.querySelector("ul");
+    // ulInsideDiv.innerHTML = "";
+    // projects.forEach((project) => {
+    //   displayProject(project, divToDisplay);
+    // });
+
+    displayStoredProjects();
   });
 
   todayTabButton.addEventListener("click", () => {
@@ -58,16 +60,42 @@ const initUI = () => {
     projectPage.style.display = "none";
 
     // Display all available tasks
-    const divToDisplay = document.querySelector(
-      ".taskContainer.todoTaskContainer"
-    );
-    const ulInsideDiv = divToDisplay.querySelector("ul");
-    ulInsideDiv.innerHTML = "";
-    const todoTasks = getAllTasks();
-    todoTasks.forEach((task) => {
-      displayTask(task, divToDisplay);
-    });
+    // const divToDisplay = document.querySelector(
+    //   ".taskContainer.todoTaskContainer"
+    // );
+    // const ulInsideDiv = divToDisplay.querySelector("ul");
+    // ulInsideDiv.innerHTML = "";
+    // const todoTasks = getAllTasks();
+    // todoTasks.forEach((task) => {
+    //   displayTask(task, divToDisplay);
+    // });
+
+    displayStoredTasks();
   });
 };
 
-export { initUI };
+const displayStoredTasks = () => {
+  // Display all available tasks
+  const divToDisplay = document.querySelector(
+    ".taskContainer.todoTaskContainer"
+  );
+  const ulInsideDiv = divToDisplay.querySelector("ul");
+  ulInsideDiv.innerHTML = "";
+  const todoTasks = getAllTasks();
+  todoTasks.forEach((task) => {
+    displayTask(task, divToDisplay);
+  });
+};
+
+const displayStoredProjects = () => {
+  const divToDisplay = document.querySelector(".projectContainer");
+  const projects = getAllProjects();
+
+  const ulInsideDiv = divToDisplay.querySelector("ul");
+  ulInsideDiv.innerHTML = "";
+  projects.forEach((project) => {
+    displayProject(project, divToDisplay);
+  });
+};
+
+export { initUI, displayStoredTasks, displayStoredProjects };
