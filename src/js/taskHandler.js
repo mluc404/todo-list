@@ -2,7 +2,13 @@
 
 import { format, isToday, isTomorrow, isYesterday } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
-import { removeTask, saveTasks, getAllTasks } from "./taskManager";
+import {
+  removeTask,
+  saveTasks,
+  getAllTasks,
+  saveProjects,
+  updateTasksInProject,
+} from "./taskManager";
 
 // Function to get form inputs to create a task object
 let createTask = function () {
@@ -45,6 +51,9 @@ const createDatePicker = (task) => {
 
     // NOTE: IN THE FUTURE, THIS SHOULD UPDATE A CENTRAL TASK MANAGER
     // AND TRIGGER A RE-RENDER OF THE TASK LIST
+    saveTasks();
+    updateTasksInProject(task);
+    saveProjects();
   });
   return calendarButton;
 };
@@ -108,6 +117,12 @@ const updateFlag = (task, flagSelection) => {
       task.priority = "noPriority";
     }
     console.log(task.priority); // confirm task.priority is updated
+
+    // NOTE: IN THE FUTURE, THIS SHOULD UPDATE A CENTRAL TASK MANAGER
+    // AND TRIGGER A RE-RENDER OF THE TASK LIST
+    saveTasks();
+    updateTasksInProject(task);
+    saveProjects();
   });
 };
 
@@ -143,6 +158,12 @@ let displayTask = function (task, divToDisplay) {
       listItem.className = "";
       task.checked = false;
     }
+
+    // NOTE: IN THE FUTURE, THIS SHOULD UPDATE A CENTRAL TASK MANAGER
+    // AND TRIGGER A RE-RENDER OF THE TASK LIST
+    saveTasks();
+    updateTasksInProject(task);
+    saveProjects();
   });
 
   let taskName = document.createElement("span");
@@ -180,6 +201,8 @@ let displayTask = function (task, divToDisplay) {
   let calendarButton = createDatePicker(task);
   calendarButton.addEventListener("change", () => {
     setDueDate(task, dueDateDisplay);
+    // update task in storage
+    saveTasks();
   });
 
   listThirdRow.append(calendarButton, dueDateDisplay);

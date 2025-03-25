@@ -24,7 +24,8 @@ const saveTasks = () => {
   console.log(myTasks);
 };
 const retrieveTasks = () => {
-  return JSON.parse(localStorage.getItem("myTasks"));
+  const retrievedTasks = JSON.parse(localStorage.getItem("myTasks"));
+  if (retrievedTasks) tasks = retrievedTasks;
 };
 const saveProjects = () => {
   const storedProjects = getAllProjects();
@@ -33,20 +34,21 @@ const saveProjects = () => {
   console.log(myProjects);
 };
 const retrieveProjects = () => {
-  return JSON.parse(localStorage.getItem("myProjects"));
+  // call retrieveTasks() to update the tasks inside projects
+  retrieveTasks();
+  const retrievedProjects = JSON.parse(localStorage.getItem("myProjects"));
+  if (retrievedProjects) projects = retrievedProjects;
 };
 
 // Store tasks and projects in arrays
 // Retrieve stored tasks
 let tasks = [];
-let retrievedTasks = retrieveTasks();
-if (retrieveTasks) tasks = retrievedTasks;
+
 console.log("this is tasks: ", tasks);
 
 // Retrieve stored projects
-let projects = [{ name: "Default", tasks: [] }]; // default project
-let retrievedProjects = retrieveProjects();
-if (retrieveProjects) projects = retrievedProjects;
+// let projects = [{ name: "Default", tasks: [] }]; // default project
+let projects = []; // default project
 
 // Add a task
 const addTask = (task) => {
@@ -68,12 +70,11 @@ const assignTaskToProject = (task) => {
   if (project) {
     project.tasks.push(task);
     task.project = project.name; // update new project in task
-
     console.table(task);
     console.table(project);
   }
-
-  return;
+  // Update projects in storage
+  saveProjects();
 };
 
 // Remove task
@@ -138,6 +139,7 @@ const removeProject = (project) => {
 
 // Get all tasks
 const getAllTasks = () => {
+  // retrieveTasks();
   return tasks;
 };
 
@@ -146,7 +148,31 @@ const getAllProjects = () => {
   return projects;
 };
 
-// const storedProjects = getAllProjects();
+// Update tasks inside a project
+const updateTasksInProject = (task) => {
+  // record the task changes inside Todo/Today pages to sync the Project page
+  const project = projects.find((p) => p.name === task.project);
+  const theTaskInProject = project.tasks.find(
+    (t) => t.taskName === task.taskName
+  );
+  if (theTaskInProject) {
+    theTaskInProject.dueDate = task.dueDate;
+    theTaskInProject.priority = task.priority;
+    theTaskInProject.checked = task.checked;
+  }
+
+  // record the task changes inside Project page to sync the other pages
+  retrieveTasks();
+  const theTask = getAllTasks().find((t) => (t.taskName = task.taskName));
+  if (theTask) {
+    theTask.dueDate = task.dueDate;
+    theTask.priority = task.priority;
+    theTask.checked = task.checked;
+  }
+  saveTasks();
+
+  // taskName, taskDescription, dueDate, priority, checked, project
+};
 
 export {
   addTask,
@@ -161,5 +187,8 @@ export {
   removeProject,
   getAllProjects,
   saveTasks,
+  retrieveTasks,
   saveProjects,
+  retrieveProjects,
+  updateTasksInProject,
 };

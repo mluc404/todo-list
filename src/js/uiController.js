@@ -4,6 +4,8 @@ import {
   getAllProjects,
   getAllTasks,
   getTasksDueToday,
+  retrieveTasks,
+  retrieveProjects,
 } from "./taskManager.js";
 import { displayTask } from "./taskHandler.js";
 import { displayProject } from "./projectHandler.js";
@@ -81,6 +83,7 @@ const displayStoredTasks = () => {
   );
   const ulInsideDiv = divToDisplay.querySelector("ul");
   ulInsideDiv.innerHTML = "";
+  retrieveTasks();
   const todoTasks = getAllTasks();
   todoTasks.forEach((task) => {
     displayTask(task, divToDisplay);
@@ -89,13 +92,14 @@ const displayStoredTasks = () => {
 
 const displayStoredProjects = () => {
   const divToDisplay = document.querySelector(".projectContainer");
-  const projects = getAllProjects();
-
   const ulInsideDiv = divToDisplay.querySelector("ul");
   ulInsideDiv.innerHTML = "";
+  retrieveProjects();
+  const projects = getAllProjects();
   projects.forEach((project) => {
     displayProject(project, divToDisplay);
   });
+  console.log(projects);
 };
 
 export { initUI, displayStoredTasks, displayStoredProjects };

@@ -12,6 +12,7 @@ import {
   getAllProjects,
   assignTaskToProject,
   saveTasks,
+  saveProjects,
 } from "./taskManager.js";
 
 // Initialize form
@@ -60,6 +61,7 @@ const initForm = () => {
 
     // Update local storage
     saveTasks();
+    saveProjects();
 
     // Add the task to project
     assignTaskToProject(task);

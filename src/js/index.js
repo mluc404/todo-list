@@ -4,7 +4,11 @@ import "../css/form.css";
 import "../css/taskDisplay.css";
 import "../css/projectPage.css";
 import { initForm } from "./taskFormHandler.js";
-import { initUI, displayStoredTasks } from "./uiController.js";
+import {
+  initUI,
+  displayStoredTasks,
+  displayStoredProjects,
+} from "./uiController.js";
 import { initProjectForm } from "./projectFormHandler.js";
 
 // Initialize the app
@@ -12,7 +16,10 @@ initForm();
 initUI();
 initProjectForm();
 
-window.onload = displayStoredTasks();
+window.addEventListener("DOMContentLoaded", () => {
+  displayStoredTasks();
+  displayStoredProjects();
+});
 
 // // Remove the sample task "Go get eggs"
 // let removeSampleTask = (function () {
