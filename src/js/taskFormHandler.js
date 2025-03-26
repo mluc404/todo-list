@@ -67,10 +67,20 @@ const initForm = () => {
     // Add the task to project
     if (task.project !== "Assign project") {
       assignTaskToProject(task);
-    }
 
-    // Re-render the projects in project page to show the added tasks
-    displayStoredProjects();
+      // Re-render the projects in project page to show the added tasks
+      // displayStoredProjects(); // this was working in last commit
+
+      let spaceForTasksInProject = document.querySelector(
+        ".spaceForTasksInProject"
+      );
+      let projDivForTask = spaceForTasksInProject.querySelector(
+        "#" + task.project
+      );
+      console.log(projDivForTask);
+
+      displayTask(task, projDivForTask);
+    }
 
     // Render task in project page
     // const projectList = document.querySelector("#projectList");

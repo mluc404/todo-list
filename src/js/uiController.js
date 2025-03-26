@@ -96,6 +96,7 @@ const displayStoredProjects = () => {
   const ulInsideDiv = divToDisplay.querySelector("ul");
   const ulInsideDiv02 = divToDisplayTasks.querySelector("ul");
 
+  // divToDisplayTasks.innerHTML = "";
   ulInsideDiv.innerHTML = "";
   ulInsideDiv02.innerHTML = "";
 

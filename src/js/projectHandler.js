@@ -27,6 +27,7 @@ let displayProject = function (project, divToDisplay) {
   let listItem = document.createElement("li");
   listItem.id = project.name;
   listItem.className = "taskList";
+  listItem.classList.add("projectNameButton");
 
   // Top row of the list item
   let listTopRow = document.createElement("span");
@@ -129,23 +130,55 @@ let displayProject = function (project, divToDisplay) {
   currentListItems.forEach((li) => listId.push(li.id));
   console.log("list id:", listId);
 
-  if (project.tasks.length > 0) {
-    project.tasks.forEach((task) => {
-      if (listId.length > 0) {
-        let item = listId.find((t) => t === task.taskName);
-        retrieveTasks();
-        let index = getAllTasks().findIndex(
-          (t) => t.taskName === task.taskName
-        );
-        if (item === undefined && index) {
-          displayTask(task, spaceForTasksInProject);
-        }
+  // if (project.tasks.length > 0) {
+  //   project.tasks.forEach((task) => {
+  //     if (listId.length > 0) {
+  //       let item = listId.find((t) => t === task.taskName);
+  //       retrieveTasks();
+  //       let index = getAllTasks().findIndex(
+  //         (t) => t.taskName === task.taskName
+  //       );
+  //       if (item === undefined && index) {
+  //         displayTask(task, spaceForTasksInProject);
+  //       }
+  //     } else {
+  //       displayTask(task, spaceForTasksInProject);
+  //     }
+  //   });
+  // }
+
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+  // Generate separate div for each project tasks container 03/26
+  let thisDiv = document.createElement("div");
+  thisDiv.className = "thisDiv";
+  thisDiv.id = project.name;
+  let ulInThisDiv = document.createElement("ul");
+  ulInThisDiv.className = "ulInThisDiv";
+  ulInThisDiv.classList.add("taskList");
+
+  thisDiv.appendChild(ulInThisDiv);
+  spaceForTasksInProject.appendChild(thisDiv);
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+  // Toggle project tasks visibility
+  // Find all .thisDiv then turn on only the one has id=project.name
+  let allThisDivs = spaceForTasksInProject.querySelectorAll(".thisDiv");
+
+  listItem.addEventListener("click", (e) => {
+    // alert("clicked");
+    console.log(e.target.textContent);
+    allThisDivs.forEach((div) => {
+      // if (div.id === e.target.textContent) {
+      if (div.id === project.name) {
+        div.style.display = "block";
       } else {
-        displayTask(task, spaceForTasksInProject);
+        div.style.display = "none";
       }
     });
-  }
-
+  });
   ///////////////////////////////////////////
   ///////////////////////////////////////////
   ///////////////////////////////////////////

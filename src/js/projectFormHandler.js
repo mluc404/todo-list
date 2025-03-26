@@ -52,7 +52,7 @@ const initProjectForm = () => {
     );
     let projectTasksDiv = document.createElement("div");
     projectTasksDiv.className = "projectTasksDiv";
-    spaceForTasksInProject.appendChild(projectTasksDiv);
+    // spaceForTasksInProject.appendChild(projectTasksDiv);
 
     // let allTasks = getAllTasks();
     // console.table(allTasks);
