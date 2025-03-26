@@ -92,15 +92,26 @@ const displayStoredTasks = () => {
 
 const displayStoredProjects = () => {
   const divToDisplay = document.querySelector(".projectContainer");
+  const divToDisplayTasks = document.querySelector(".spaceForTasksInProject");
   const ulInsideDiv = divToDisplay.querySelector("ul");
+  const ulInsideDiv02 = divToDisplayTasks.querySelector("ul");
+
   ulInsideDiv.innerHTML = "";
+  ulInsideDiv02.innerHTML = "";
+
   retrieveProjects();
   retrieveTasks();
+
   const projects = getAllProjects();
-  projects.forEach((project) => {
-    displayProject(project, divToDisplay);
-  });
-  console.log(projects);
+  console.log("projectsssssss", projects);
+
+  if (projects.length > 0) {
+    projects.forEach((project) => {
+      displayProject(project, divToDisplay);
+    });
+  }
+
+  // console.log(projects);
 };
 
 export { initUI, displayStoredTasks, displayStoredProjects };

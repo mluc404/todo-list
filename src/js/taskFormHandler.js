@@ -2,7 +2,7 @@
 
 import { createTask, displayTask, removeTaskDisplay } from "./taskHandler.js";
 import { format } from "date-fns";
-
+import { displayStoredProjects } from "./uiController.js";
 import {
   addTask,
   getAllTasks,
@@ -69,6 +69,9 @@ const initForm = () => {
       assignTaskToProject(task);
     }
 
+    // Re-render the projects in project page to show the added tasks
+    displayStoredProjects();
+
     // Render task in project page
     // const projectList = document.querySelector("#projectList");
     // // find the <li> that has id = task.project or id = assignedProject.name
@@ -100,7 +103,7 @@ const initForm = () => {
   // Open/close form dialog
   let addTaskButton = document.querySelector(".addTaskButton");
   let closeFormButton = document.querySelector(".closeFormButton");
-  let dialog = document.querySelector("dialog");
+  let dialog = document.querySelector(".taskDialog");
 
   addTaskButton.addEventListener("click", () => {
     dialog.showModal();

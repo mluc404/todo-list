@@ -1,5 +1,10 @@
 import { createProject, displayProject } from "./projectHandler";
-import { addProject, getAllProjects, saveProjects } from "./taskManager";
+import {
+  addProject,
+  getAllProjects,
+  saveProjects,
+  retrieveProjects,
+} from "./taskManager";
 
 // Initialize form
 const initProjectForm = () => {
@@ -29,6 +34,7 @@ const initProjectForm = () => {
     e.preventDefault();
     let project = createProject();
     const divToDisplay = document.querySelector(".projectContainer");
+    // const divToDisplay = document.querySelector("#projectNavList");
     console.log(divToDisplay);
     displayProject(project, divToDisplay);
 
@@ -39,6 +45,14 @@ const initProjectForm = () => {
 
     // Save project to local storage
     saveProjects();
+
+    // Create div inside "spaceForTasksInProject"
+    let spaceForTasksInProject = document.querySelector(
+      ".spaceForTasksInProject"
+    );
+    let projectTasksDiv = document.createElement("div");
+    projectTasksDiv.className = "projectTasksDiv";
+    spaceForTasksInProject.appendChild(projectTasksDiv);
 
     // let allTasks = getAllTasks();
     // console.table(allTasks);
@@ -70,6 +84,20 @@ const initProjectForm = () => {
     e.preventDefault();
     dialog.close();
   });
+
+  //////////////////////////////////////////////////////////
+  // Open close task form for project
+  let addTaskButton02 = document.querySelector("#addTaskButton-02");
+  let addTaskButton01 = document.querySelector("#addTaskButton-01");
+
+  addTaskButton02.addEventListener("click", () => {
+    addTaskButton01.click();
+  });
+
+  // closeTaskFormInProjectBtn.addEventListener("click", (e) => {
+  //   e.preventDefault();
+  //   dialogTaskinProject.close();
+  // });
 };
 
 export { initProjectForm };

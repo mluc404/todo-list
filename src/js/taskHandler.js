@@ -130,6 +130,7 @@ const updateFlag = (task, flagSelection) => {
 let displayTask = function (task, divToDisplay) {
   let taskList = divToDisplay.querySelector(".taskList");
   let listItem = document.createElement("li");
+  listItem.id = task.taskName;
 
   // Top row of the list item
   let listTopRow = document.createElement("span");

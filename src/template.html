@@ -24,12 +24,80 @@
 
             <div class="projectsTab">
               <button class="projectTabButton">Projects</button>
+              <button class="addProjectButton">+Project</button>
+
+              <div class="projectContainer">
+                <!-- <ul class="taskList" id="projectList"></ul> -->
+                <ul class="projectList" id="projectList"></ul>
+              </div>
             </div>
           </div>
         </nav>
       </div>
 
       <div class="mainSection">
+        <dialog class="taskDialog">
+          <form action="">
+            <input
+              type="text"
+              id="taskName"
+              class="entryName"
+              placeholder="Task name"
+            />
+            <input
+              type="text"
+              id="taskDescription"
+              class="entryDescription"
+              placeholder="Description"
+            />
+            <div class="spacer"></div>
+            <div class="taskUtils">
+              <input
+                type="date"
+                id="dueDate"
+                name="dueDate"
+                value="2222-02-22"
+              />
+              <div class="priorityDiv">
+                <!-- <label for="priorityChoice" id="priorityFlag"
+                  >&#x1F3F3;</label
+                > -->
+                <select name="priorityChoice" id="priorityChoice">
+                  <!-- <option
+                    value="select-priority"
+                    class="selectPriority"
+                    disabled="true"
+                    selected="true"
+                    hidden="true"
+                  >
+                    Priority
+                  </option> -->
+                  <option value="noPriority" class="noPriority">
+                    No Priority
+                  </option>
+                  <option value="high" class="highPriority">High</option>
+                  <option value="medium" class="medPriority">Medium</option>
+                  <option value="low" class="lowPriority">Low</option>
+                </select>
+              </div>
+              <!-- Assign Project button -->
+              <!-- <button class="addToProject">Assign project</button> -->
+              <div class="priorityDiv">
+                <!-- <label for="projectChoice">Assign project</label> -->
+                <select name="projectChoice" id="projectChoice">
+                  <option value="noProject">Assign project</option>
+                </select>
+              </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="divider"></div>
+            <div class="spacer"></div>
+            <div class="addOrCancel">
+              <button class="closeFormButton">Cancel</button>
+              <button id="formSubmitButton">Add task</button>
+            </div>
+          </form>
+        </dialog>
         <div class="todoPage">
           <h1>Todo List</h1>
           <div class="taskContainer todoTaskContainer">
@@ -45,69 +113,9 @@
               <div class="divider"></div>
             </ul>
           </div>
-          <button class="addTaskButton">+ Add Task</button>
-          <dialog>
-            <form action="">
-              <input
-                type="text"
-                id="taskName"
-                class="entryName"
-                placeholder="Task name"
-              />
-              <input
-                type="text"
-                id="taskDescription"
-                class="entryDescription"
-                placeholder="Description"
-              />
-              <div class="spacer"></div>
-              <div class="taskUtils">
-                <input
-                  type="date"
-                  id="dueDate"
-                  name="dueDate"
-                  value="2222-02-22"
-                />
-                <div class="priorityDiv">
-                  <!-- <label for="priorityChoice" id="priorityFlag"
-                    >&#x1F3F3;</label
-                  > -->
-                  <select name="priorityChoice" id="priorityChoice">
-                    <!-- <option
-                      value="select-priority"
-                      class="selectPriority"
-                      disabled="true"
-                      selected="true"
-                      hidden="true"
-                    >
-                      Priority
-                    </option> -->
-                    <option value="noPriority" class="noPriority">
-                      No Priority
-                    </option>
-                    <option value="high" class="highPriority">High</option>
-                    <option value="medium" class="medPriority">Medium</option>
-                    <option value="low" class="lowPriority">Low</option>
-                  </select>
-                </div>
-                <!-- Assign Project button -->
-                <!-- <button class="addToProject">Assign project</button> -->
-                <div class="priorityDiv">
-                  <!-- <label for="projectChoice">Assign project</label> -->
-                  <select name="projectChoice" id="projectChoice">
-                    <option value="noProject">Assign project</option>
-                  </select>
-                </div>
-              </div>
-              <div class="spacer"></div>
-              <div class="divider"></div>
-              <div class="spacer"></div>
-              <div class="addOrCancel">
-                <button class="closeFormButton">Cancel</button>
-                <button id="formSubmitButton">Add task</button>
-              </div>
-            </form>
-          </dialog>
+          <button class="addTaskButton" id="addTaskButton-01">
+            + Add Task
+          </button>
         </div>
 
         <div class="todayPage">
@@ -119,41 +127,47 @@
 
         <div class="projectPage">
           <h1>Projects</h1>
-          <button class="addProjectButton">+Project</button>
+          <!-- <button class="addProjectButton">+Project</button> -->
+          <button class="addTaskButtonInProject" id="addTaskButton-02">
+            + Add Task
+          </button>
+          <!-- 
           <div class="projectContainer">
             <ul class="taskList" id="projectList"></ul>
+          </div> -->
+          <div class="spaceForTasksInProject">
+            <ul class="taskList" id="projectList02"></ul>
           </div>
-
-          <dialog class="projectDialog">
-            <form class="projectForm" action="">
-              <input
-                type="text"
-                id="projectName"
-                class="entryName"
-                placeholder="Project name"
-              />
-              <input
-                type="text"
-                id="projectDescription"
-                class="entryDescription"
-                placeholder="Description"
-              />
-              <div class="spacer"></div>
-              <div class="taskUtils">
-                <button class="addToProject">Assign tasks</button>
-              </div>
-              <div class="spacer"></div>
-              <div class="divider"></div>
-              <div class="spacer"></div>
-              <div class="addOrCancel">
-                <button class="closeFormButton closeProjectFormButton">
-                  Cancel
-                </button>
-                <button id="projectFormSubmitButton">Create Project</button>
-              </div>
-            </form>
-          </dialog>
         </div>
+        <dialog class="projectDialog">
+          <form class="projectForm" action="">
+            <input
+              type="text"
+              id="projectName"
+              class="entryName"
+              placeholder="Project name"
+            />
+            <input
+              type="text"
+              id="projectDescription"
+              class="entryDescription"
+              placeholder="Description"
+            />
+            <div class="spacer"></div>
+            <div class="taskUtils">
+              <!-- <button class="addToProject">Assign tasks</button> -->
+            </div>
+            <div class="spacer"></div>
+            <div class="divider"></div>
+            <div class="spacer"></div>
+            <div class="addOrCancel">
+              <button class="closeFormButton closeProjectFormButton">
+                Cancel
+              </button>
+              <button id="projectFormSubmitButton">Create Project</button>
+            </div>
+          </form>
+        </dialog>
       </div>
     </div>
   </body>

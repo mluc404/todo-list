@@ -1,5 +1,12 @@
-import { removeProject, getTasksForProject, saveProjects } from "./taskManager";
+import {
+  removeProject,
+  getTasksForProject,
+  saveProjects,
+  getAllTasks,
+  retrieveTasks,
+} from "./taskManager";
 import { displayTask } from "./taskHandler";
+import { displayStoredProjects } from "./uiController";
 
 let createProject = function () {
   let name = document.querySelector("#projectName").value.trim();
@@ -100,13 +107,6 @@ let displayProject = function (project, divToDisplay) {
   // 4th row to display tasks
   const tasksDiv = document.createElement("div");
   tasksDiv.id = "tasksInProject";
-
-  // Render task in project page
-  // const projectList = document.querySelector("#projectList");
-  // find the <li> that has id = task.project or id = assignedProject.name
-  // const listItem = document.querySelector(`#${task.project}`);
-  // console.log(listItem);
-  // const tasksInProject = listItem.querySelector("#tasksInProject");
   const listItemInside = document.createElement("li");
   listItemInside.className = "taskList";
   tasksDiv.appendChild(listItemInside);
@@ -114,8 +114,47 @@ let displayProject = function (project, divToDisplay) {
     project.tasks.forEach((task) => displayTask(task, tasksDiv));
   }
 
+  ////////////////////////////////////////
+  ////////////////////////////////////////
+  ////////////////////////////////////////
+  // RE-DISPLAY TASKS INSIDE spaceForTasksInProject
+  const spaceForTasksInProject = document.querySelector(
+    ".spaceForTasksInProject"
+  );
+  const taskListInProject = spaceForTasksInProject.querySelector("ul");
+  const newTaskDiv = spaceForTasksInProject.querySelector("#projectList02");
+  const currentListItems = newTaskDiv.querySelectorAll("li");
+  console.log(currentListItems);
+  let listId = [];
+  currentListItems.forEach((li) => listId.push(li.id));
+  console.log("list id:", listId);
+
+  if (project.tasks.length > 0) {
+    project.tasks.forEach((task) => {
+      if (listId.length > 0) {
+        let item = listId.find((t) => t === task.taskName);
+        retrieveTasks();
+        let index = getAllTasks().findIndex(
+          (t) => t.taskName === task.taskName
+        );
+        if (item === undefined && index) {
+          displayTask(task, spaceForTasksInProject);
+        }
+      } else {
+        displayTask(task, spaceForTasksInProject);
+      }
+    });
+  }
+
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+
   // Append top row, second and third rows into list item
-  listItem.append(listTopRow, projectDescription, listThirdRow, tasksDiv);
+  // listItem.append(listTopRow, projectDescription, listThirdRow, tasksDiv);
+
+  // Actually just first row for project nav list
+  listItem.append(listTopRow);
 
   // Create a divider line to separate next task
   let divider = document.createElement("div");

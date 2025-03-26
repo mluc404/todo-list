@@ -15,6 +15,8 @@
 
 ////////////////////////////////////////////////////
 import { format, isMatch, isToday, parseJSON } from "date-fns";
+import { displayStoredProjects } from "./uiController";
+import { displayProject } from "./projectHandler";
 
 // Local storage for tasks and proj
 const saveTasks = () => {
@@ -66,10 +68,10 @@ const assignTaskToProject = (task) => {
     }
   }
   // Assign to new project
-  const project = projects.find((p) => p.name === task.project);
-  if (project) {
-    project.tasks.push(task);
-    task.project = project.name; // update new project in task
+  const projectIndex = projects.findIndex((p) => p.name === task.project);
+  if (projectIndex !== -1) {
+    projects[projectIndex].tasks.push(task);
+    task.project = projects[projectIndex].name; // update new project in task
   }
   // Update projects in storage
   saveProjects();
@@ -82,6 +84,7 @@ const removeTask = (task) => {
   if (taskIndex !== -1) {
     tasks.splice(taskIndex, 1);
     saveTasks();
+    // retrieveTasks();
   }
   // remove from associated project
   if (task.project !== "Assign project") {
@@ -137,7 +140,39 @@ const addProject = (project) => {
 // Remove project
 const removeProject = (project) => {
   const projIndex = projects.indexOf(project);
-  if (projIndex !== -1) projects.splice(projIndex, 1);
+  console.log(projects[projIndex].tasks[0]);
+  console.log(projects[projIndex].tasks[1]);
+  console.table(projects[projIndex].tasks);
+
+  if (projIndex !== -1) {
+    console.log(projects[projIndex].tasks);
+    projects[projIndex].tasks.forEach((task) => {
+      console.log("here here");
+      const taskIndex = tasks.findIndex((t) => t.taskName === task.taskName);
+      if (taskIndex !== -1) {
+        tasks.splice(taskIndex, 1);
+        saveTasks();
+      }
+    });
+
+    // displayProject(project, divToDisplay);
+    projects.splice(projIndex, 1);
+    saveProjects();
+    retrieveProjects();
+    retrieveTasks();
+
+    displayStoredProjects();
+    displayStoredProjects(); // have to run it twice to work!!!
+
+    // Alternatively, manually reset innerHTML:
+
+    // const divToDisplay = document.querySelector(".projectContainer");
+    // const divToDisplayTasks = document.querySelector(".spaceForTasksInProject");
+    // const ulInsideDiv = divToDisplay.querySelector("ul");
+    // const ulInsideDiv02 = divToDisplayTasks.querySelector("ul");
+    // ulInsideDiv.innerHTML = "";
+    // ulInsideDiv02.innerHTML = "";
+  }
 };
 
 // Get all tasks
