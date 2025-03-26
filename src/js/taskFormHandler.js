@@ -15,6 +15,7 @@ import {
   saveProjects,
   retrieveProjects,
 } from "./taskManager.js";
+import { displayProject } from "./projectHandler.js";
 
 // Initialize form
 const initForm = () => {
@@ -71,15 +72,25 @@ const initForm = () => {
       // Re-render the projects in project page to show the added tasks
       // displayStoredProjects(); // this was working in last commit
 
-      let spaceForTasksInProject = document.querySelector(
-        ".spaceForTasksInProject"
-      );
-      let projDivForTask = spaceForTasksInProject.querySelector(
-        "#" + task.project
-      );
-      console.log(projDivForTask);
+      // this code block works but should be inside displayProject()
+      // let spaceForTasksInProject = document.querySelector(
+      //   ".spaceForTasksInProject"
+      // );
+      // let projDivForTask = spaceForTasksInProject.querySelector(
+      //   "#" + task.project
+      // );
+      // console.log(projDivForTask);
+      // displayTask(task, projDivForTask);
+      ///////////////////////////////////////
 
-      displayTask(task, projDivForTask);
+      // Call displayProject() instead
+      const divToDisplay = document.querySelector(".projectContainer");
+      const projectToDisplay = getAllProjects().find(
+        (p) => p.name === task.project
+      );
+      if (projectToDisplay) {
+        displayProject(projectToDisplay, divToDisplay);
+      }
     }
 
     // Render task in project page

@@ -25,6 +25,7 @@ let createProject = function () {
 let displayProject = function (project, divToDisplay) {
   let projectList = divToDisplay.querySelector("#projectList");
   let listItem = document.createElement("li");
+
   listItem.id = project.name;
   listItem.className = "taskList";
   listItem.classList.add("projectNameButton");
@@ -106,14 +107,6 @@ let displayProject = function (project, divToDisplay) {
   //   listThirdRow.append(calendarButton, dueDateDisplay);
 
   // 4th row to display tasks
-  const tasksDiv = document.createElement("div");
-  tasksDiv.id = "tasksInProject";
-  const listItemInside = document.createElement("li");
-  listItemInside.className = "taskList";
-  tasksDiv.appendChild(listItemInside);
-  if (project.tasks.length > 0) {
-    project.tasks.forEach((task) => displayTask(task, tasksDiv));
-  }
 
   ////////////////////////////////////////
   ////////////////////////////////////////
@@ -130,23 +123,6 @@ let displayProject = function (project, divToDisplay) {
   currentListItems.forEach((li) => listId.push(li.id));
   console.log("list id:", listId);
 
-  // if (project.tasks.length > 0) {
-  //   project.tasks.forEach((task) => {
-  //     if (listId.length > 0) {
-  //       let item = listId.find((t) => t === task.taskName);
-  //       retrieveTasks();
-  //       let index = getAllTasks().findIndex(
-  //         (t) => t.taskName === task.taskName
-  //       );
-  //       if (item === undefined && index) {
-  //         displayTask(task, spaceForTasksInProject);
-  //       }
-  //     } else {
-  //       displayTask(task, spaceForTasksInProject);
-  //     }
-  //   });
-  // }
-
   ///////////////////////////////////////////
   ///////////////////////////////////////////
   ///////////////////////////////////////////
@@ -160,18 +136,28 @@ let displayProject = function (project, divToDisplay) {
 
   thisDiv.appendChild(ulInThisDiv);
   spaceForTasksInProject.appendChild(thisDiv);
+
+  // The code to display the tasks for each project inside its .thisDiv
+  let projDivForTask = spaceForTasksInProject.querySelector("#" + project.name);
+  console.log(projDivForTask);
+  project.tasks.forEach((task) => {
+    displayTask(task, projDivForTask);
+  });
+  //////////////////////////////////////////////////
+
   ///////////////////////////////////////////
   ///////////////////////////////////////////
   ///////////////////////////////////////////
   // Toggle project tasks visibility
   // Find all .thisDiv then turn on only the one has id=project.name
-  let allThisDivs = spaceForTasksInProject.querySelectorAll(".thisDiv");
 
   listItem.addEventListener("click", (e) => {
-    // alert("clicked");
-    console.log(e.target.textContent);
+    document.querySelector(".projectPage").style.display = "block";
+    document.querySelector(".todoPage").style.display = "none";
+    document.querySelector(".todayPage").style.display = "none";
+
+    let allThisDivs = spaceForTasksInProject.querySelectorAll(".thisDiv");
     allThisDivs.forEach((div) => {
-      // if (div.id === e.target.textContent) {
       if (div.id === project.name) {
         div.style.display = "block";
       } else {
@@ -194,7 +180,47 @@ let displayProject = function (project, divToDisplay) {
   divider.className = "divider";
 
   // Finally, append list item and divider into task list
-  projectList.append(listItem, divider);
+
+  let allListItems = projectList.querySelectorAll("li");
+  let allListItemsArr = new Array(allListItems);
+
+  console.log(allListItems);
+  console.log(allListItemsArr);
+  if (allListItems.length > 0) {
+    // allListItems.forEach((li) => {
+    //   console.log(`list item id: ${listItem.id}`);
+    //   console.log(`<li> id: ${li.id}`);
+    //   if (listItem.id !== li.id) {
+    //     projectList.append(listItem, divider);
+    //   }
+    // });
+    let isValid = true;
+    allListItems.forEach((li) => {
+      console.log(`list item id: ${listItem.id}`);
+      console.log(`<li> id: ${li.id}`);
+      if (listItem.id === li.id) {
+        console.log("heeeeeeeeeeeeeee");
+        isValid = false;
+        // projectList.removeChild(li);
+      }
+    });
+    if (isValid) {
+      projectList.append(listItem, divider);
+    }
+
+    // console.log(listItem.id);
+    // let ifNotExisted = allListItemsArr.every((li) => li.id !== listItem.id);
+    // console.log("is project not displayed yet: ", ifNotExisted);
+
+    // if (ifNotExisted) {
+    //   projectList.append(listItem, divider);
+    // }
+  } else {
+    console.log("not heree");
+    projectList.append(listItem, divider);
+  }
+
+  /////////////
 
   // Activate Remove Task button functionality
   removeProjectDisplay(project, taskRemoveButton);
