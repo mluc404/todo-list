@@ -137,13 +137,28 @@ let displayProject = function (project, divToDisplay) {
   thisDiv.appendChild(ulInThisDiv);
   spaceForTasksInProject.appendChild(thisDiv);
 
+  // check for existing <li> inside ulInThisDiv before adding new li for task
+  let allLis = ulInThisDiv.querySelectorAll("li");
   // The code to display the tasks for each project inside its .thisDiv
   let projDivForTask = spaceForTasksInProject.querySelector("#" + project.name);
   console.log(projDivForTask);
   project.tasks.forEach((task) => {
-    displayTask(task, projDivForTask);
+    if (allLis.length > 0) {
+      let isValid = true;
+      allLis.forEach((li) => {
+        if (task.taskName === li.id) {
+          console.log(li.id);
+          console.log(task.taskName);
+          isValid = false;
+        }
+      });
+      if (isValid) {
+        displayTask(task, projDivForTask);
+      }
+    } else {
+      displayTask(task, projDivForTask);
+    }
   });
-  //////////////////////////////////////////////////
 
   ///////////////////////////////////////////
   ///////////////////////////////////////////
@@ -243,6 +258,21 @@ let removeProjectDisplay = function (project, removeButton) {
 
     // update project in local storage
     saveProjects();
+
+    // remove tasks display in project page
+    const spaceForTasksInProject = document.querySelector(
+      ".spaceForTasksInProject"
+    );
+    let allThisDivs = spaceForTasksInProject.querySelectorAll(".thisDiv");
+    allThisDivs.forEach((div) => {
+      if (div.id === project.name) {
+        console.log("hereeeeeeeeeeeeee");
+        spaceForTasksInProject.removeChild(div);
+      }
+    });
+
+    // const thisDiv = spaceForTasksInProject.querySelector("#" + project.id);
+    // thisDiv.innerHTML = "";
   });
 };
 

@@ -34,14 +34,10 @@ const initProjectForm = () => {
     e.preventDefault();
     let project = createProject();
     const divToDisplay = document.querySelector(".projectContainer");
-    // const divToDisplay = document.querySelector("#projectNavList");
-    console.log(divToDisplay);
     displayProject(project, divToDisplay);
 
-    // Testing new functions from projectManager
     // Add the newly created task into taskManager
     addProject(project);
-    console.log(getAllProjects());
 
     // Save project to local storage
     saveProjects();
@@ -50,22 +46,10 @@ const initProjectForm = () => {
     let spaceForTasksInProject = document.querySelector(
       ".spaceForTasksInProject"
     );
-    let projectTasksDiv = document.createElement("div");
-    projectTasksDiv.className = "projectTasksDiv";
+    // let projectTasksDiv = document.createElement("div");
+    // projectTasksDiv.className = "projectTasksDiv";
+
     // spaceForTasksInProject.appendChild(projectTasksDiv);
-
-    // let allTasks = getAllTasks();
-    // console.table(allTasks);
-
-    // let todayTasks = getTasksDueToday();
-    // console.table(todayTasks);
-
-    // let randomDate = "2025-05-25";
-    // let arr = filterTasksByDueDate(randomDate);
-    // console.table(arr);
-
-    // let arr = filterTasksByPriority("high");
-    // console.table(filterTasksByPriority("high"));
 
     // selectPriority.style.backgroundColor = "var(--dialog-bg-color, white)"; // reset to default None
     form.reset();

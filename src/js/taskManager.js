@@ -158,8 +158,9 @@ const removeProject = (project) => {
     // displayProject(project, divToDisplay);
     projects.splice(projIndex, 1);
     saveProjects();
-    retrieveProjects();
-    retrieveTasks();
+
+    // retrieveProjects();
+    // retrieveTasks();
 
     displayStoredProjects();
     displayStoredProjects(); // have to run it twice to work!!!

@@ -88,8 +88,20 @@ const initForm = () => {
       const projectToDisplay = getAllProjects().find(
         (p) => p.name === task.project
       );
+
+      const projectList = divToDisplay.querySelector("#projectList");
+      console.log(projectList);
+      const projectBtns = projectList.querySelectorAll("li");
       if (projectToDisplay) {
         displayProject(projectToDisplay, divToDisplay);
+        const projectPage = document.querySelector(".projectPage");
+        if (projectPage.style.display === "block") {
+          projectBtns.forEach((btn) => {
+            if (btn.id === task.project) {
+              btn.click();
+            }
+          });
+        }
       }
     }
 
