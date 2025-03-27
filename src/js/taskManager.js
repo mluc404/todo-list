@@ -223,6 +223,30 @@ const updateTasksInProject = (task) => {
   // taskName, taskDescription, dueDate, priority, checked, project
 };
 
+const reRenderProjectTasks = (task) => {
+  /////////////////////////////////////////////
+  /////////////////////////////////////////////
+  // Rerender the tasks inside project page
+  const divToDisplay = document.querySelector(".projectContainer");
+  const projectToDisplay = getAllProjects().find(
+    (p) => p.name === task.project
+  );
+  const projectList = divToDisplay.querySelector("#projectList");
+  console.log(projectList);
+  const projectBtns = projectList.querySelectorAll("li");
+  if (projectToDisplay) {
+    displayProject(projectToDisplay, divToDisplay);
+    const projectPage = document.querySelector(".projectPage");
+    if (projectPage.style.display === "block") {
+      projectBtns.forEach((btn) => {
+        if (btn.id === task.project) {
+          btn.click();
+        }
+      });
+    }
+  }
+};
+
 export {
   addTask,
   assignTaskToProject,
@@ -240,4 +264,5 @@ export {
   saveProjects,
   retrieveProjects,
   updateTasksInProject,
+  reRenderProjectTasks,
 };

@@ -6,9 +6,13 @@ import {
   removeTask,
   saveTasks,
   getAllTasks,
+  getAllProjects,
   saveProjects,
   updateTasksInProject,
+  reRenderProjectTasks,
 } from "./taskManager";
+
+import { displayProject } from "./projectHandler";
 
 // Function to get form inputs to create a task object
 let createTask = function () {
@@ -122,6 +126,7 @@ const updateFlag = (task, flagSelection) => {
     // AND TRIGGER A RE-RENDER OF THE TASK LIST
     // saveTasks();
     updateTasksInProject(task);
+    reRenderProjectTasks(task);
     // saveProjects();
   });
 };
@@ -165,6 +170,7 @@ let displayTask = function (task, divToDisplay) {
     saveTasks();
     updateTasksInProject(task);
     saveProjects();
+    reRenderProjectTasks(task);
   });
 
   let taskName = document.createElement("span");
@@ -204,6 +210,30 @@ let displayTask = function (task, divToDisplay) {
     setDueDate(task, dueDateDisplay);
     // update task in storage
     saveTasks();
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    // Rerender the tasks inside project page
+    // const divToDisplay = document.querySelector(".projectContainer");
+    // const projectToDisplay = getAllProjects().find(
+    //   (p) => p.name === task.project
+    // );
+    // const projectList = divToDisplay.querySelector("#projectList");
+    // console.log(projectList);
+    // const projectBtns = projectList.querySelectorAll("li");
+    // if (projectToDisplay) {
+    //   displayProject(projectToDisplay, divToDisplay);
+    //   const projectPage = document.querySelector(".projectPage");
+    //   if (projectPage.style.display === "block") {
+    //     projectBtns.forEach((btn) => {
+    //       if (btn.id === task.project) {
+    //         btn.click();
+    //       }
+    //     });
+    //   }
+    // }
+    //The above code works. Replacing with reRenderProjecTasks()
+    reRenderProjectTasks(task);
+    ///////////////////////////////////////
   });
 
   listThirdRow.append(calendarButton, dueDateDisplay);
