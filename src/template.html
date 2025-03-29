@@ -24,7 +24,7 @@
 
             <div class="projectsTab">
               <button class="projectTabButton">Projects</button>
-              <button class="addProjectButton">+Project</button>
+              <button class="addProjectButton">+</button>
 
               <div class="projectContainer">
                 <!-- <ul class="taskList" id="projectList"></ul> -->
@@ -100,6 +100,7 @@
         </dialog>
         <div class="todoPage">
           <h1>Todo List</h1>
+          <button class="addTaskButton" id="addTaskButton-01">Add Task</button>
           <div class="taskContainer todoTaskContainer">
             <ul class="taskList">
               <li>
@@ -113,9 +114,6 @@
               <div class="divider"></div>
             </ul>
           </div>
-          <button class="addTaskButton" id="addTaskButton-01">
-            + Add Task
-          </button>
         </div>
 
         <div class="todayPage">
@@ -127,9 +125,12 @@
 
         <div class="projectPage">
           <h1>Projects</h1>
-          <button class="addTaskButtonInProject" id="addTaskButton-02">
-            + Add Task
-          </button>
+          <div class="projectPageTitleRow">
+            <button class="addTaskButtonInProject" id="addTaskButton-02">
+              Add Task
+            </button>
+            <h3 id="projectTitleDisplay"></h3>
+          </div>
 
           <div class="spaceForTasksInProject">
             <ul class="taskList" id="projectList02"></ul>

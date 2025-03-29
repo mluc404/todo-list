@@ -66,3 +66,26 @@ nav {
 button:hover {
   cursor: pointer;
 }
+
+@media (width<500px) {
+  .todo-app {
+    display: flex;
+    flex-direction: column;
+
+    /* display: grid;
+    grid-template-rows: 1fr 2fr; */
+  }
+  .sidebar {
+    height: 20vh;
+    min-height: 20px;
+    /* background-color: blue; */
+
+    /* display: flex;
+    flex-direction: row; */
+  }
+
+  nav {
+    display: flex;
+    flex-direction: row;
+  }
+}

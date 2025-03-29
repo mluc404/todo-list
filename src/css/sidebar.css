@@ -6,3 +6,54 @@
 .projectNameButton:hover {
   cursor: pointer;
 }
+
+.sidebar {
+  background-color: #dad5c5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  min-height: 100vh;
+  height: 100%;
+
+  padding: 15px;
+}
+
+.projectsTab .addProjectButton {
+  font-size: 1.3rem;
+  padding: 0;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.projectsTab {
+  display: grid;
+  grid-template-columns: 1fr 40px;
+}
+
+.projectContainer {
+  grid-column: 1/3;
+}
+
+#projectRemoveButton {
+  opacity: 0;
+}
+
+.projectNameButton .projectListTopRow {
+  width: 100%;
+  /* background-color: red; */
+}
+
+#projectList .projectNameButton {
+  /* background-color: blue; */
+  width: 100%;
+}
+
+.projectTabButton {
+  width: 100px;
+}

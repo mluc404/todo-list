@@ -26,7 +26,7 @@ let displayProject = function (project, divToDisplay) {
   let projectList = divToDisplay.querySelector("#projectList");
   let listItem = document.createElement("li");
 
-  listItem.id = project.name;
+  listItem.id = project.name.replace(/\s/g, "");
   listItem.className = "taskList";
   listItem.classList.add("projectNameButton");
 
@@ -68,6 +68,7 @@ let displayProject = function (project, divToDisplay) {
   let taskRemoveButton = document.createElement("button");
   taskRemoveButton.setAttribute("aria-label", "Remove task");
   taskRemoveButton.className = "taskRemoveButton";
+  taskRemoveButton.id = "projectRemoveButton";
   taskRemoveButton.innerHTML = `&#x1F5D1;`;
 
   //   // Display priority flag
@@ -129,7 +130,7 @@ let displayProject = function (project, divToDisplay) {
   // Generate separate div for each project tasks container 03/26
   let thisDiv = document.createElement("div");
   thisDiv.className = "thisDiv";
-  thisDiv.id = project.name;
+  thisDiv.id = project.name.replace(/\s/g, "");
   let ulInThisDiv = document.createElement("ul");
   ulInThisDiv.className = "ulInThisDiv";
   ulInThisDiv.classList.add("taskList");
@@ -140,7 +141,10 @@ let displayProject = function (project, divToDisplay) {
   // check for existing <li> inside ulInThisDiv before adding new li for task
   let allLis = ulInThisDiv.querySelectorAll("li");
   // The code to display the tasks for each project inside its .thisDiv
-  let projDivForTask = spaceForTasksInProject.querySelector("#" + project.name);
+  let projectIdSelector = project.name.replace(/\s/g, "");
+  let projDivForTask = spaceForTasksInProject.querySelector(
+    "#" + projectIdSelector
+  );
   console.log(projDivForTask);
   project.tasks.forEach((task) => {
     if (allLis.length > 0) {
@@ -165,6 +169,7 @@ let displayProject = function (project, divToDisplay) {
   ///////////////////////////////////////////
   // Toggle project tasks visibility
   // Find all .thisDiv then turn on only the one has id=project.name
+  let projectTitleDispaly = document.querySelector("#projectTitleDisplay");
 
   listItem.addEventListener("click", (e) => {
     document.querySelector(".projectPage").style.display = "block";
@@ -173,12 +178,29 @@ let displayProject = function (project, divToDisplay) {
 
     let allThisDivs = spaceForTasksInProject.querySelectorAll(".thisDiv");
     allThisDivs.forEach((div) => {
-      if (div.id === project.name) {
+      if (div.id === project.name.replace(/\s/g, "")) {
         div.style.display = "block";
       } else {
         div.style.display = "none";
       }
     });
+
+    // if (listItem.style.backgroundColor === "red") {
+    //   listItem.style.backgroundColor = "transparent";
+    // } else {
+    //   listItem.style.backgroundColor = "red";
+    // }
+    console.log(listItem);
+    projectTitleDispaly.textContent =
+      listItem.querySelector(".taskName").textContent;
+  });
+
+  // On hover each Project name, show the remove project button
+  listItem.addEventListener("mouseenter", (e) => {
+    taskRemoveButton.style.opacity = 1;
+  });
+  listItem.addEventListener("mouseleave", (e) => {
+    taskRemoveButton.style.opacity = 0;
   });
   ///////////////////////////////////////////
   ///////////////////////////////////////////
@@ -229,7 +251,7 @@ let displayProject = function (project, divToDisplay) {
 
     // if (ifNotExisted) {
     //   projectList.append(listItem, divider);
-    // }
+    // }listItem.id
   } else {
     console.log("not heree");
     projectList.append(listItem, divider);
