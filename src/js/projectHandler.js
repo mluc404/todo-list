@@ -13,10 +13,13 @@ let createProject = function () {
   let description = document.querySelector("#projectDescription").value.trim();
   let tasks = [];
 
-  //   let dueDate = document.querySelector("#dueDate").value;
-  //   let priority = document.querySelector("#priorityChoice").value;
-
-  //   let checked = false;
+  const spaceForTasksInProject = document.querySelector(
+    ".spaceForTasksInProject"
+  );
+  const thisDiv = document.createElement("div");
+  thisDiv.className = "thisDiv";
+  thisDiv.id = name.replace(/\s/g, "");
+  spaceForTasksInProject.appendChild(thisDiv);
 
   return { name, description, tasks };
 };
@@ -40,26 +43,6 @@ let displayProject = function (project, divToDisplay) {
   checkbox.setAttribute("type", "checkbox");
   checkbox.className = "checkbox";
 
-  //   // Add checkbox functionality
-  //   if (task.checked) {
-  //     listItem.className = "completed";
-  //     checkbox.setAttribute("checked", "true");
-  //   } else {
-  //     listItem.className = "";
-  //     // checkbox.setAttribute("checked", "false");
-  //     checkbox.removeAttribute("checked");
-  //   }
-
-  //   checkbox.addEventListener("change", (e) => {
-  //     if (e.target.checked) {
-  //       listItem.className = "completed";
-  //       task.checked = true;
-  //     } else {
-  //       listItem.className = "";
-  //       task.checked = false;
-  //     }
-  //   });
-
   let projectName = document.createElement("span");
   projectName.className = "taskName";
   // projectName.id = 'projectName'
@@ -70,12 +53,6 @@ let displayProject = function (project, divToDisplay) {
   taskRemoveButton.className = "taskRemoveButton";
   taskRemoveButton.id = "projectRemoveButton";
   taskRemoveButton.innerHTML = `&#x1F5D1;`;
-
-  //   // Display priority flag
-  //   let flagSelection = createFlag(task);
-
-  //   // Allow changing priority flag and update task.priority
-  //   updateFlag(task, flagSelection);
 
   // Finally, append 4 elements into listTopRow
   listTopRow.append(projectName, taskRemoveButton);
@@ -89,29 +66,6 @@ let displayProject = function (project, divToDisplay) {
   let listThirdRow = document.createElement("div");
   listThirdRow.className = "listThirdRow";
 
-  // // Display the tasks for this project
-  // let tasks = getTasksForProject(project.name);
-  // tasks.forEach((task) => {
-  //   display(task);
-  // });
-
-  //   let dueDateDisplay = document.createElement("p");
-  //   dueDateDisplay.className = "dueDateDisplay";
-
-  //   setDueDate(task, dueDateDisplay);
-
-  //   let calendarButton = createDatePicker(task);
-  //   calendarButton.addEventListener("change", () => {
-  //     setDueDate(task, dueDateDisplay);
-  //   });
-
-  //   listThirdRow.append(calendarButton, dueDateDisplay);
-
-  // 4th row to display tasks
-
-  ////////////////////////////////////////
-  ////////////////////////////////////////
-  ////////////////////////////////////////
   // RE-DISPLAY TASKS INSIDE spaceForTasksInProject
   const spaceForTasksInProject = document.querySelector(
     ".spaceForTasksInProject"
@@ -127,42 +81,97 @@ let displayProject = function (project, divToDisplay) {
   ///////////////////////////////////////////
   ///////////////////////////////////////////
   ///////////////////////////////////////////
-  // Generate separate div for each project tasks container 03/26
-  let thisDiv = document.createElement("div");
-  thisDiv.className = "thisDiv";
-  thisDiv.id = project.name.replace(/\s/g, "");
-  let ulInThisDiv = document.createElement("ul");
-  ulInThisDiv.className = "ulInThisDiv";
-  ulInThisDiv.classList.add("taskList");
 
-  thisDiv.appendChild(ulInThisDiv);
-  spaceForTasksInProject.appendChild(thisDiv);
+  // Generate separate div for each project tasks container
+  // let thisDiv = document.createElement("div");
+  // thisDiv.className = "thisDiv";
+  // thisDiv.id = project.name.replace(/\s/g, "");
+  // let ulInThisDiv = document.createElement("ul");
+  // ulInThisDiv.className = "ulInThisDiv";
+  // ulInThisDiv.classList.add("taskList");
+  // thisDiv.appendChild(ulInThisDiv);
 
-  // check for existing <li> inside ulInThisDiv before adding new li for task
-  let allLis = ulInThisDiv.querySelectorAll("li");
-  // The code to display the tasks for each project inside its .thisDiv
-  let projectIdSelector = project.name.replace(/\s/g, "");
-  let projDivForTask = spaceForTasksInProject.querySelector(
-    "#" + projectIdSelector
+  let thisDiv = document.querySelector(`#${project.name.replace(/\s/g, "")}`);
+  console.log(thisDiv);
+  let ulInThisDiv = document.querySelector(".ulInThisDiv");
+  if (thisDiv === null) {
+    console.log("here");
+    thisDiv = document.createElement("div");
+    thisDiv.className = "thisDiv";
+    thisDiv.id = project.name.replace(/\s/g, "");
+    ulInThisDiv = document.createElement("ul");
+    thisDiv.appendChild(ulInThisDiv);
+    spaceForTasksInProject.appendChild(thisDiv);
+    ulInThisDiv.className = "ulInThisDiv";
+    ulInThisDiv.classList.add("taskList");
+    console.log(thisDiv);
+    console.log(ulInThisDiv);
+  } else if (ulInThisDiv === null) {
+    ulInThisDiv = document.createElement("ul");
+    thisDiv.appendChild(ulInThisDiv);
+    spaceForTasksInProject.appendChild(thisDiv);
+    ulInThisDiv.className = "ulInThisDiv";
+    ulInThisDiv.classList.add("taskList");
+    console.log(ulInThisDiv);
+    // ulInThisDiv.innerHTML = ""; // Clear existing tasks to prevent duplication
+  }
+  // else {
+  //   ulInThisDiv.innerHTML = "";
+  // }
+
+  // thisDiv = document.createElement("div");
+  // thisDiv.className = "thisDiv";
+  // thisDiv.id = project.name.replace(/\s/g, "");
+
+  // let ulInThisDiv = thisDiv.querySelector(".ulInThisDiv");
+  // if (!ulInThisDiv) {
+  //   ulInThisDiv = document.createElement("ul");
+  //   thisDiv.appendChild(ulInThisDiv);
+  //   spaceForTasksInProject.appendChild(thisDiv);
+  //   ulInThisDiv.className = "ulInThisDiv";
+  //   ulInThisDiv.classList.add("taskList");
+  //   thisDiv.appendChild(ulInThisDiv);
+  // } else {
+  //   ulInThisDiv.innerHTML = ""; // Clear existing tasks to prevent duplication
+  // }
+
+  console.log(ulInThisDiv);
+  // Get tasks from taskManager and display only new ones
+  const tasksInProject = getTasksForProject(project.name);
+  const existingTaskIds = Array.from(ulInThisDiv.querySelectorAll("li")).map(
+    (li) => li.id
   );
-  console.log(projDivForTask);
-  project.tasks.forEach((task) => {
-    if (allLis.length > 0) {
-      let isValid = true;
-      allLis.forEach((li) => {
-        if (task.taskName === li.id) {
-          console.log(li.id);
-          console.log(task.taskName);
-          isValid = false;
-        }
-      });
-      if (isValid) {
-        displayTask(task, projDivForTask);
-      }
-    } else {
-      displayTask(task, projDivForTask);
+  tasksInProject.forEach((task) => {
+    if (!existingTaskIds.includes(task.taskName)) {
+      displayTask(task, thisDiv);
     }
   });
+
+  // // check for existing <li> inside ulInThisDiv before adding new li for task
+  // let allLis = ulInThisDiv.querySelectorAll("li");
+  // // The code to display the tasks for each project inside its .thisDiv
+  // let projectIdSelector = project.name.replace(/\s/g, "");
+  // let projDivForTask = spaceForTasksInProject.querySelector(
+  //   "#" + projectIdSelector
+  // );
+  // console.log(projDivForTask);
+  // project.tasks.forEach((task) => {
+  //   if (allLis.length > 0) {
+  //     let isValid = true;
+  //     allLis.forEach((li) => {
+  //       if (task.taskName === li.id) {
+  //         console.log(li.id);
+  //         console.log(task.taskName);
+  //         isValid = false;
+  //       }
+  //     });
+  //     if (isValid) {
+  //       displayTask(task, projDivForTask);
+  //     }
+  //   } else {
+  //     displayTask(task, projDivForTask);
+  //   }
+  // });
 
   ///////////////////////////////////////////
   ///////////////////////////////////////////
@@ -185,11 +194,6 @@ let displayProject = function (project, divToDisplay) {
       }
     });
 
-    // if (listItem.style.backgroundColor === "red") {
-    //   listItem.style.backgroundColor = "transparent";
-    // } else {
-    //   listItem.style.backgroundColor = "red";
-    // }
     console.log(listItem);
     projectTitleDispaly.textContent =
       listItem.querySelector(".taskName").textContent;
@@ -202,12 +206,6 @@ let displayProject = function (project, divToDisplay) {
   listItem.addEventListener("mouseleave", (e) => {
     taskRemoveButton.style.opacity = 0;
   });
-  ///////////////////////////////////////////
-  ///////////////////////////////////////////
-  ///////////////////////////////////////////
-
-  // Append top row, second and third rows into list item
-  // listItem.append(listTopRow, projectDescription, listThirdRow, tasksDiv);
 
   // Actually just first row for project nav list
   listItem.append(listTopRow);
@@ -217,47 +215,26 @@ let displayProject = function (project, divToDisplay) {
   divider.className = "divider";
 
   // Finally, append list item and divider into task list
-
   let allListItems = projectList.querySelectorAll("li");
   let allListItemsArr = new Array(allListItems);
 
   console.log(allListItems);
   console.log(allListItemsArr);
   if (allListItems.length > 0) {
-    // allListItems.forEach((li) => {
-    //   console.log(`list item id: ${listItem.id}`);
-    //   console.log(`<li> id: ${li.id}`);
-    //   if (listItem.id !== li.id) {
-    //     projectList.append(listItem, divider);
-    //   }
-    // });
     let isValid = true;
     allListItems.forEach((li) => {
       console.log(`list item id: ${listItem.id}`);
       console.log(`<li> id: ${li.id}`);
       if (listItem.id === li.id) {
-        console.log("heeeeeeeeeeeeeee");
         isValid = false;
-        // projectList.removeChild(li);
       }
     });
     if (isValid) {
       projectList.append(listItem, divider);
     }
-
-    // console.log(listItem.id);
-    // let ifNotExisted = allListItemsArr.every((li) => li.id !== listItem.id);
-    // console.log("is project not displayed yet: ", ifNotExisted);
-
-    // if (ifNotExisted) {
-    //   projectList.append(listItem, divider);
-    // }listItem.id
   } else {
-    console.log("not heree");
     projectList.append(listItem, divider);
   }
-
-  /////////////
 
   // Activate Remove Task button functionality
   removeProjectDisplay(project, taskRemoveButton);

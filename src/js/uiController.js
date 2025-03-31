@@ -27,7 +27,7 @@ const initUI = () => {
     todayPage.style.display = "none";
     todoPage.style.display = "none";
 
-    // displayStoredProjects();
+    displayStoredProjects();
   });
 
   todayTabButton.addEventListener("click", () => {

@@ -68,6 +68,11 @@ const initForm = () => {
     // Add the task to project
     if (task.project !== "Assign project") {
       assignTaskToProject(task);
+      if (task.project !== "Assign project") {
+        assignTaskToProject(task);
+        saveProjects();
+        displayStoredProjects(); // Re-render projects and their tasks
+      }
 
       // Re-render the projects in project page to show the added tasks
       // displayStoredProjects(); // this was working in last commit
@@ -83,26 +88,26 @@ const initForm = () => {
       // displayTask(task, projDivForTask);
       ///////////////////////////////////////
 
-      // Call displayProject() instead
-      const divToDisplay = document.querySelector(".projectContainer");
-      const projectToDisplay = getAllProjects().find(
-        (p) => p.name === task.project
-      );
+      // // Call displayProject() instead
+      // const divToDisplay = document.querySelector(".projectContainer");
+      // const projectToDisplay = getAllProjects().find(
+      //   (p) => p.name === task.project
+      // );
 
-      const projectList = divToDisplay.querySelector("#projectList");
-      console.log(projectList);
-      const projectBtns = projectList.querySelectorAll("li");
-      if (projectToDisplay) {
-        displayProject(projectToDisplay, divToDisplay);
-        const projectPage = document.querySelector(".projectPage");
-        if (projectPage.style.display === "block") {
-          projectBtns.forEach((btn) => {
-            if (btn.id === task.project) {
-              btn.click();
-            }
-          });
-        }
-      }
+      // const projectList = divToDisplay.querySelector("#projectList");
+      // console.log(projectList);
+      // const projectBtns = projectList.querySelectorAll("li");
+      // if (projectToDisplay) {
+      //   displayProject(projectToDisplay, divToDisplay);
+      //   const projectPage = document.querySelector(".projectPage");
+      //   if (projectPage.style.display === "block") {
+      //     projectBtns.forEach((btn) => {
+      //       if (btn.id === task.project) {
+      //         btn.click();
+      //       }
+      //     });
+      //   }
+      // }
     }
 
     // Render task in project page
