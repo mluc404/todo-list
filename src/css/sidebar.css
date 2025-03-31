@@ -3,8 +3,17 @@
   font-size: 1rem;
 }
 
+.projectNameButton {
+  color: rgb(46, 46, 46);
+  transition: transform 0.2s ease-in-out;
+  border-radius: 5px;
+  padding: 0 5px !important;
+}
+
 .projectNameButton:hover {
   cursor: pointer;
+  background-color: #c1bdb0;
+  transform: scale(1.05);
 }
 
 .sidebar {
@@ -28,7 +37,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-left: 20px;
+  padding: 0 20px;
 }
 
 .projectsTab {
@@ -42,6 +51,7 @@
 
 #projectRemoveButton {
   opacity: 0;
+  border: none;
 }
 
 .projectNameButton .projectListTopRow {
